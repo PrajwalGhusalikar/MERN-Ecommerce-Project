@@ -2,6 +2,7 @@ import React from 'react'
 import Carousel from '../../Components/HomeCarousel/Carousel'
 import HomeSectionCarousel from '../../Components/HomeSectionCarousel/HomeSectionCarousel'
 
+
 const HomePage = () => {
   return (
     <>
@@ -10,6 +11,9 @@ const HomePage = () => {
     </div>
      <div>
      <HomeSectionCarousel/>
+     <HomeSectionCarousel/>
+     <HomeSectionCarousel/>
+     
    </div></>
   )
 }

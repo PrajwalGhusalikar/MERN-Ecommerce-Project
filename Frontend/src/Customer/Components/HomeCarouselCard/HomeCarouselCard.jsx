@@ -1,16 +1,16 @@
 import React from "react";
-import { HomeSectionCarouselData } from "./homeCardCarouselData";
-const HomeCarouselCard = () => {
+const HomeCarouselCard = ({image}) => {
   return (
     <div>
       <div className="w-48 h-76 flex flex-col items-center bg-slate-400">
         <div className="img">
-          <img
-
-            src="https://images.pexels.com/photos/10558196/pexels-photo-10558196.jpeg?auto=compress&cs=tinysrgb&w=600"
-            alt=""
-            className="h-60 w-48"
-          />
+          {/* {HomeCardCarouselData.map((item) => {
+            <img key={item.key} src={item.img} alt="" className="h-60 w-48" />;
+            {
+              console.log("key--", item.key);
+            }
+          })} */}
+          <img className="h-60 w-48" src={image} alt="" />
         </div>
         <div className="cloth-text">
           <h2 className="text-xl">Cloths</h2>
