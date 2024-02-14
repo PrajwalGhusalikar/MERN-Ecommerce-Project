@@ -987,23 +987,42 @@ video {
 }
 
 .alice-carousel__next-btn-wrapper [data-area]::after {
-  background-color: red;
-  width: 50px;
-  height: 10px;
+  background-color: transparent;
+ 
   position: relative;
-  bottom: 176px;
+  bottom: 240px;
   z-index: 1;
   left: 579px;
-  scale: 10;
+  border-radius: 4px;
+  font-size: 50px;
 }
-
+.alice-carousel__prev-btn-wrapper {
+  height: 0px;
+  padding: 0px;
+  margin: 0px;
+}
+.alice-carousel__next-btn-wrapper {
+  height: 0px;
+  padding: 0px;
+  margin: 0px;
+  width: 0px;
+}
+.alice-carousel__next-btn-item {
+  height: 0px;
+  width: 0px;
+  display: none;
+}
 .alice-carousel__prev-btn [data-area]::after {
-  background-color: red;
-  width: 50px;
-  height: 10px;
+  background-color: transparent;
   position: relative;
-  bottom: 176px;
+  bottom: 240px;
   z-index: 1;
   right: 579px;
-  scale: 10;
+  border-radius: 50%;
+  font-size: 50px;
 }
+
+
+/* .alice-carousel__wrapper{
+  height: 500px;
+} */

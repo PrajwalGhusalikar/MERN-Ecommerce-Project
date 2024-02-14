@@ -1,21 +1,23 @@
-import React from 'react'
-import Carousel from '../../Components/HomeCarousel/Carousel'
-import HomeSectionCarousel from '../../Components/HomeSectionCarousel/HomeSectionCarousel'
-
-
+import React from "react";
+import HomeCarousel from "../../Components/HomeCarousel/HomeCarousel";
+import HomeSectionCarousel from "../../Components/HomeSectionCarousel/HomeSectionCarousel";
+import {menskurtas} from "../../Components/HomeSectionCarousel/menskurtas"
+import {womenskurtas} from "../../Components/HomeSectionCarousel/womenskurtas"
+import {saree} from "../../Components/HomeSectionCarousel/saree"
+document.body.style.backgroundColor = "#E6E6FA";
 const HomePage = () => {
   return (
     <>
-    <div>
-      <Carousel/>
-    </div>
-     <div>
-     <HomeSectionCarousel/>
-     <HomeSectionCarousel/>
-     <HomeSectionCarousel/>
-     
-   </div></>
-  )
-}
+      <div>
+        <HomeCarousel />
+      </div>
+      <div className="mt-20">
+        <HomeSectionCarousel data={menskurtas} heading="Mens Kurtas" />
+        <HomeSectionCarousel data={womenskurtas} heading="Womens Kurtas"  />
+        <HomeSectionCarousel data={saree} heading="Ladies Saree" />
+      </div>
+    </>
+  );
+};
 
-export default HomePage
+export default HomePage;
