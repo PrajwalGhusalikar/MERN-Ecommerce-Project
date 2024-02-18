@@ -422,7 +422,7 @@ export default function Products() {
               </div>
               {/* Product grid */}
               <div className="lg:col-span-3">
-                <div className="flex flex-wrap justify-evenly  ">
+                <div className="flex flex-wrap justify-between  ">
                   {menskurtas.map((items) => (
                     <ProductCard
                       key={items.id}

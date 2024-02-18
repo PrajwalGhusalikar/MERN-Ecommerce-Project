@@ -25,7 +25,7 @@ const ProductCard = ({ brand, image, title, price, discountedPrice }) => {
               {brand}
             </Typography>
             <div className="flex">
-              <Typography color="blue-gray" className="font-medium mx-3">
+              <Typography color="green" className="font-medium mx-3">
                 {price}
               </Typography>
               <Typography
