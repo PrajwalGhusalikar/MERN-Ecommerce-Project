@@ -4,6 +4,7 @@ import HomeSectionCarousel from "../../Components/HomeSectionCarousel/HomeSectio
 import {menskurtas} from "../../Components/HomeSectionCarousel/menskurtas"
 import {womenskurtas} from "../../Components/HomeSectionCarousel/womenskurtas"
 import {saree} from "../../Components/HomeSectionCarousel/saree"
+import { Footer } from "../../Components/Footer/Footer";
 document.body.style.backgroundColor = "#E6E6FA";
 const HomePage = () => {
   return (
@@ -16,6 +17,7 @@ const HomePage = () => {
         <HomeSectionCarousel data={womenskurtas} heading="Womens Kurtas"  />
         <HomeSectionCarousel data={saree} heading="Ladies Saree" />
       </div>
+      
     </>
   );
 };

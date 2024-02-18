@@ -1,14 +1,22 @@
 // import { Home } from '@mui/icons-material';
-import NavBar from './Customer/Components/Navigation/NavBar';
-import './style.css';
-import HomePage from './Customer/Pages/HomePage/HomePage';
+import NavBar from "./Customer/Components/Navigation/NavBar";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import HomePage from "./Customer/Pages/HomePage/HomePage";
+import Products from "./Customer/Components/Products/Products";
+import { Footer } from "./Customer/Components/Footer/Footer";
 
 function App() {
   return (
-    <div className="App">
-      <NavBar/>
-      <HomePage/>
-    </div>
+    <Router>
+      <div className="App">
+        <NavBar />
+        {/* <HomePage/> */}
+        <Products />
+        <div className="footer">
+          <Footer />
+        </div>
+      </div>
+    </Router>
   );
 }
 
