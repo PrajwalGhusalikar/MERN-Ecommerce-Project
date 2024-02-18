@@ -1,6 +1,7 @@
 import { React, useState } from "react";
 import { RadioGroup } from "@headlessui/react";
 import { Rating, Typography } from "@material-tailwind/react";
+import ReviewSection from "../ReviewSection/ReviewSection";
 
 const product = {
   name: "Basic Tee 6-Pack",
@@ -54,6 +55,7 @@ const product = {
   details:
     'The 6-Pack includes two black, two white, and two heather gray Basic Tees. Sign up for our subscription service and be the first to get new, exciting colors, like our upcoming "Charcoal Gray" limited release.',
 };
+
 const reviews = { href: "#", average: 4, totalCount: 117 };
 
 function classNames(...classes) {
@@ -64,7 +66,9 @@ export default function ProductDetails() {
   const [rated, setRated] = useState(4);
   const [selectedColor, setSelectedColor] = useState(product.colors[0]);
   const [selectedSize, setSelectedSize] = useState(product.sizes[2]);
-
+  const [active, setActive] = useState(
+    "https://images.unsplash.com/photo-1499696010180-025ef6e1a8f9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"
+  );
   return (
     <div className="bg-white">
       <div className="pt-6">
@@ -107,30 +111,31 @@ export default function ProductDetails() {
           </ol>
         </nav>
 
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid items-start grid-cols-2 gap-4">
           {/* Image gallery */}
-          <div className="mx-auto mt-6 max-w-2xl sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-1 place-content-center h-[750px] ">
-            <div className="h-[500px] aspect-w-3 hidden overflow-hidden rounded-lg lg:block mt-0 mb-4">
+          <div className="grid gap-4">
+            <div className="mt-20 mx-8">
               <img
-                src={product.images[0].src}
-                alt={product.images[0].alt}
-                className=" w-full h-full object-cover object-center"
+                className="h-full w-full max-w-full rounded-lg object-cover object-center md:h-[480px]"
+                src={active}
+                alt=""
               />
             </div>
-            <div className="hidden sm:flex justify-around h-48 lg:gap-y-8">
-              {product.images.slice(0, 4).map((item) => (
-                <div className="h-44 w-40 mx-2 hover:scale-105 ease-out duration-150">
+            <div className="flex justify-around">
+              {product.images.map((item) => (
+                <div className="">
                   <img
+                    onClick={() => setActive(item.src)}
                     src={item.src}
-                    alt={item.alt}
-                    className="h-full w-40 object-cover object-center rounded"
+                    className="max-w-full h-32 w-28 cursor-pointer rounded-lg object-cover object-center"
+                    alt="gallery-image"
                   />
                 </div>
               ))}
             </div>
           </div>
           {/* Product info */}
-          <div className="mx-auto max-w-2xl px-4 pb-16 pt-10 sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-1 lg:grid-rows-[auto,auto,1fr] lg:gap-x-8 lg:px-8 lg:pb-24 lg:pt-16">
+          <div className="mx-auto max-w-2xl px-4 pb-16 pt-10 sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-1 lg:grid-rows-[auto,auto,1fr] lg:gap-x-8 lg:px-8 lg:pb-10 lg:pt-16">
             <div className="lg:col-span-2 lg:border-r lg:border-gray-200 lg:pr-8">
               <h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
                 {product.name}
@@ -140,7 +145,7 @@ export default function ProductDetails() {
             {/* Options */}
             <div className="mt-4 lg:row-span-3 lg:mt-0">
               <h2 className="sr-only">Product information</h2>
-              <p className="text-3xl tracking-tight text-gray-900">
+              <p className="text-5xl my-2 mb-0 tracking-tight text-gray-900">
                 {product.price}
               </p>
 
@@ -149,7 +154,7 @@ export default function ProductDetails() {
                 <h3 className="sr-only">Reviews</h3>
                 <div className="flex items-center gap-2 font-bold text-blue-gray-500">
                   {rated}.7
-                  <Rating value={4} onChange={(value) => setRated(value)} />
+                  <Rating value={rated} readonly />
                   <Typography
                     color="blue-gray"
                     className="font-medium text-blue-gray-500"
@@ -234,7 +239,7 @@ export default function ProductDetails() {
                                 ? "cursor-pointer bg-white text-gray-900 shadow-sm"
                                 : "cursor-not-allowed bg-gray-50 text-gray-200",
                               active ? "ring-2 ring-indigo-500" : "",
-                              "group relative flex items-center justify-center rounded-md border py-3 px-4 text-sm font-medium uppercase hover:bg-gray-50 focus:outline-none sm:flex-1 sm:py-6"
+                              "group relative flex items-center justify-center rounded-md border py-3 px-4 text-sm font-medium uppercase hover:bg-gray-50 focus:outline-none sm:flex-1 sm:py-3"
                             )
                           }
                         >
@@ -330,7 +335,10 @@ export default function ProductDetails() {
             </div>
           </div>
         </div>
-     
+        {/*Product Ratings and Review */}
+        <section>
+          <ReviewSection />
+        </section>
       </div>
     </div>
   );
