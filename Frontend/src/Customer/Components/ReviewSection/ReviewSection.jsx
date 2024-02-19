@@ -6,7 +6,7 @@ const ReviewSection = () => {
   return (
     <div>
       <div className="flex justify-evenly w-screen">
-        <div className="h-96 overflow-y-scroll scroll-px-0">
+        <div className="h-96 overflow-y-scroll scroll-px-0 -scroll-my-6">
           <ReviewCard />
         </div>
         <div className="w-full flex justify-center">

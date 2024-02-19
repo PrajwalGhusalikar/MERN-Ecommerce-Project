@@ -1,7 +1,9 @@
 import { React, useState } from "react";
 import { RadioGroup } from "@headlessui/react";
 import { Rating, Typography } from "@material-tailwind/react";
-import ReviewSection from "../ReviewSection/ReviewSection";
+import ReviewSection from "../../Components/ReviewSection/ReviewSection";
+import SimilarProducts from "../../Components/SimilarProducts/SimilarProducts";
+import { menskurtas } from "../../Components/HomeSectionCarousel/menskurtas";
 
 const product = {
   name: "Basic Tee 6-Pack",
@@ -67,7 +69,7 @@ export default function ProductDetails() {
   const [selectedColor, setSelectedColor] = useState(product.colors[0]);
   const [selectedSize, setSelectedSize] = useState(product.sizes[2]);
   const [active, setActive] = useState(
-    "https://images.unsplash.com/photo-1499696010180-025ef6e1a8f9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"
+    "https://tailwindui.com/img/ecommerce-images/product-page-02-secondary-product-shot.jpg"
   );
   return (
     <div className="bg-white">
@@ -127,7 +129,11 @@ export default function ProductDetails() {
                   <img
                     onClick={() => setActive(item.src)}
                     src={item.src}
-                    className="max-w-full h-32 w-28 cursor-pointer rounded-lg object-cover object-center"
+                    className={`max-w-full h-32 w-28 ${
+                      item.src === active
+                        ? "border border-gray-500"
+                        : "border-none"
+                    } cursor-pointer rounded-lg object-cover object-center`}
                     alt="gallery-image"
                   />
                 </div>
@@ -338,6 +344,11 @@ export default function ProductDetails() {
         {/*Product Ratings and Review */}
         <section>
           <ReviewSection />
+        </section>
+
+        {/* Similar Products */}
+        <section>
+          <SimilarProducts products={menskurtas} />
         </section>
       </div>
     </div>

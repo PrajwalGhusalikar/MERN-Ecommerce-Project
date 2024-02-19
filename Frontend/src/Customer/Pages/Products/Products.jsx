@@ -9,7 +9,7 @@ import {
   Squares2X2Icon,
 } from "@heroicons/react/20/solid";
 import ProductCard from "./ProductCard";
-import { menskurtas } from "../HomeSectionCarousel/menskurtas";
+import { menskurtas } from "../../Components/HomeSectionCarousel/menskurtas";
 import { filters, singleFilter } from "./filterData";
 import { Typography } from "@material-tailwind/react";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -31,8 +31,8 @@ export default function Products() {
   const navigate = useNavigate();
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
 
+  const searchParams = new URLSearchParams(location.search);
   const handleFilter = (sectionId, value) => {
-    const searchParams = new URLSearchParams(location.search);
     let filterValue = searchParams.getAll(sectionId);
     // console.log("searchparam", searchParams.getAll(sectionId)[0].split(","));
     // Handle case where filterValue is empty
@@ -62,12 +62,15 @@ export default function Products() {
     navigate({ search: `?${query}` });
   };
 
-  const handleSingleInput = (sectionId, value) => {
-    const searchParams = new URLSearchParams(location.search);
+  const handleSingleInput = (sectionId, e) => {
+    let value = e.target.value;
     searchParams.set(sectionId, value);
+
+    if (!value) {
+      searchParams.delete(sectionId);
+    }
+
     const query = searchParams.toString();
-    console.log("query", query);
-    // Assuming navigate function is defined somewhere
     navigate({ search: `?${query}` });
   };
 
@@ -393,15 +396,12 @@ export default function Products() {
                                     id={`filter-${section.id}-${optionIdx}`}
                                     name={`${section.id}[]`}
                                     onChange={(e) => {
-                                      handleSingleInput(
-                                        section.id,
-                                        e.target.value
-                                      );
+                                      handleSingleInput(section.id, e);
                                     }}
                                     defaultValue={"none"}
                                     value={option.value}
                                     type="radio"
-                                    Checked={option.checked}
+                                    checked={option.checked}
                                     className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
                                   />
                                   <label

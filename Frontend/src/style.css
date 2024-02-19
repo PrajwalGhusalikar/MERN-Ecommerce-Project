@@ -988,7 +988,7 @@ video {
 
 .alice-carousel__next-btn-wrapper [data-area]::after {
   background-color: transparent;
- 
+
   position: relative;
   bottom: 240px;
   z-index: 1;
@@ -1021,7 +1021,6 @@ video {
   border-radius: 50%;
   font-size: 50px;
 }
-
 
 /* .alice-carousel__wrapper{
   height: 500px;

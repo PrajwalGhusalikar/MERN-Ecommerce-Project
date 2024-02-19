@@ -1,17 +1,3 @@
-/*
-  This example requires some changes to your config:
-  
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/aspect-ratio'),
-    ],
-  }
-  ```
-*/
 import { Fragment, useState } from "react";
 import { Dialog, Popover, Tab, Transition } from "@headlessui/react";
 import {
@@ -19,7 +5,13 @@ import {
   MagnifyingGlassIcon,
   ShoppingBagIcon,
   XMarkIcon,
+  ShoppingCartIcon,
+  
+  
 } from "@heroicons/react/24/outline";
+import flag from "../../../assets/flag.png"
+import { Link } from "react-router-dom";
+
 
 const navigation = {
   categories: [
@@ -358,16 +350,12 @@ export default function NavBar() {
               </button>
 
               {/* Logo */}
-              <div className="ml-4 flex lg:ml-0">
-                <a href="#">
+              <Link to="/"  className="ml-4 flex lg:ml-0">
+              <ShoppingCartIcon className="h-10"/>
                   <span className="sr-only">Your Company</span>
-                  <img
-                    className="h-8 w-auto"
-                    src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-                    alt=""
-                  />
-                </a>
-              </div>
+                
+                
+              </Link>
 
               {/* Flyout menus */}
               <Popover.Group className="hidden lg:ml-8 lg:block lg:self-stretch">
@@ -480,8 +468,8 @@ export default function NavBar() {
                       )}
                     </Popover>
                   ))}
-
-                  {navigation.pages.map((page) => (
+                  {/* Temp Comment */}
+                  {/* {navigation.pages.map((page) => (
                     <a
                       key={page.name}
                       href={page.href}
@@ -489,7 +477,27 @@ export default function NavBar() {
                     >
                       {page.name}
                     </a>
-                  ))}
+                  ))} */}
+
+                  {/* Remove Then */}
+                  <Link
+                    to="/products"
+                    className="flex items-center text-sm font-medium text-gray-700 hover:text-gray-800"
+                  >
+                    Products
+                  </Link>
+                  <Link
+                    to="/productdetails"
+                    className="flex items-center text-sm font-medium text-gray-700 hover:text-gray-800"
+                  >
+                    Product Details
+                  </Link>
+                  <Link
+                    to="/cart"
+                    className="flex items-center text-sm font-medium text-gray-700 hover:text-gray-800"
+                  >
+                    Cart
+                  </Link>
                 </div>
               </Popover.Group>
 
@@ -516,11 +524,11 @@ export default function NavBar() {
                     className="flex items-center text-gray-700 hover:text-gray-800"
                   >
                     <img
-                      src="https://tailwindui.com/img/flags/flag-canada.svg"
+                      src={flag}
                       alt=""
                       className="block h-auto w-5 flex-shrink-0"
                     />
-                    <span className="ml-3 block text-sm font-medium">CAD</span>
+                    <span className="ml-3 block text-sm font-medium">IND</span>
                     <span className="sr-only">, change currency</span>
                   </a>
                 </div>
