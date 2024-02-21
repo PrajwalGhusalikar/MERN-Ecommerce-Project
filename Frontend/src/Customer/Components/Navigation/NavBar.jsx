@@ -498,6 +498,12 @@ export default function NavBar() {
                   >
                     Cart
                   </Link>
+                  <Link
+                    to="/checkout"
+                    className="flex items-center text-sm font-medium text-gray-700 hover:text-gray-800"
+                  >
+                    Checkout
+                  </Link>
                 </div>
               </Popover.Group>
 
