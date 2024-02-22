@@ -4,6 +4,7 @@ import {
   CogIcon,
   UserIcon,
   BuildingLibraryIcon,
+  ShoppingCartIcon,
 } from "@heroicons/react/24/outline";
 import { useLocation, useNavigate } from "react-router-dom";
 import DeliveryAddress from "./DeliveryAddress";
@@ -63,7 +64,7 @@ export function Checkout() {
             </div>
           </Step>
           <Step onClick={() => setSteps(2)}>
-            <CogIcon className="h-5 w-5" />
+            <ShoppingCartIcon className="h-5 w-5" />
             <div className="absolute -bottom-[4.5rem] w-max text-center">
               <Typography
                 variant="h6"
@@ -97,7 +98,7 @@ export function Checkout() {
             </div>
           </Step>
         </Stepper>
-        <div className="mt-32 flex justify-between">
+        <div className="mt-20 flex justify-between">
           <Button onClick={handlePrev} disabled={isFirstStep}>
             Prev
           </Button>
