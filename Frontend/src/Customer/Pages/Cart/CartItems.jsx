@@ -87,74 +87,6 @@ const CartItems = () => {
       description:
         "A traditional garment embodying elegance and grace. Crafted from fine fabrics, it features intricate embroidery and a relaxed fit, providing comfort and style.",
     },
-    {
-      image:
-        "https://rukminim1.flixcart.com/image/612/612/xif0q/kurta/y/c/x/xl-kast107hp-majestic-man-original-imafw49u5uty4agx-bb.jpeg?q=70",
-      brand: "Majestic Man",
-      title: "Men Solid Pure Cotton Straight Kurta",
-      color: "Pink",
-      discountedPrice: 499,
-      price: 1499,
-      discountPersent: 66,
-      size: "S",
-      quantity: 100,
-      topLavelCategory: "Men",
-      secondLavelCategory: "Clothing",
-      thirdLavelCategory: "mens_kurta",
-      description:
-        "A traditional garment embodying elegance and grace. Crafted from fine fabrics, it features intricate embroidery and a relaxed fit, providing comfort and style.",
-    },
-    {
-      image:
-        "https://rukminim1.flixcart.com/image/612/612/kpodocw0/t-shirt/x/o/4/xl-wr-64-wrodss-original-imag3upwgq9n9fbv.jpeg?q=70",
-      brand: "WRODSS",
-      title: "Men Solid Cotton Blend Straight Kurta",
-      color: "Black",
-      discountedPrice: 277,
-      price: 999,
-      discountPersent: 72,
-      size: "S",
-      quantity: 100,
-      topLavelCategory: "Men",
-      secondLavelCategory: "Clothing",
-      thirdLavelCategory: "mens_kurta",
-      description:
-        "A traditional garment embodying elegance and grace. Crafted from fine fabrics, it features intricate embroidery and a relaxed fit, providing comfort and style.",
-    },
-    {
-      image:
-        "https://rukminim1.flixcart.com/image/612/612/l4zxn680/kurta/i/g/u/s-mtml0039-341-manthan-original-imagfrz3gwgdtczm.jpeg?q=70",
-      brand: "Manthan",
-      title: "Men Printed Cotton Blend Straight Kurta",
-      color: "Blue",
-      discountedPrice: 765,
-      price: 1049,
-      discountPersent: 27,
-      size: "S",
-      quantity: 85,
-      topLavelCategory: "Men",
-      secondLavelCategory: "Clothing",
-      thirdLavelCategory: "mens_kurta",
-      description:
-        "A traditional garment embodying elegance and grace. Crafted from fine fabrics, it features intricate embroidery and a relaxed fit, providing comfort and style.",
-    },
-    {
-      image:
-        "https://rukminim1.flixcart.com/image/612/612/xif0q/kurta/m/e/e/s-kurta-rahul-look-original-imaga2g6qmhbywdf-bb.jpeg?q=70",
-      brand: "RAHUL LOOK",
-      title: "Men Solid Pure Cotton Straight Kurta",
-      color: "Green",
-      discountedPrice: 499,
-      price: 1599,
-      discountPersent: 68,
-      size: "S",
-      quantity: 99,
-      topLavelCategory: "Men",
-      secondLavelCategory: "Clothing",
-      thirdLavelCategory: "mens_kurta",
-      description:
-        "A traditional garment embodying elegance and grace. Crafted from fine fabrics, it features intricate embroidery and a relaxed fit, providing comfort and style.",
-    },
   ]);
 
   const handleChange = (e, index) => {
@@ -191,12 +123,11 @@ const CartItems = () => {
             </div>
 
             <div className="flex flex-1 items-center justify-end gap-2">
-              <div className="text-xl text-gray-500">{items.price}$</div>
+              <div className="text-xl text-green-400 px-3 pt-3">
+                {items.price}₹
+              </div>
               <form>
-                <label htmlFor="Line1Qty" className="sr-only">
-                  {" "}
-                  Quantity{" "}
-                </label>
+                <label className="text-sm"> Quantity </label>
 
                 <input
                   type="number"
@@ -208,7 +139,7 @@ const CartItems = () => {
                 />
               </form>
 
-              <button className="text-gray-600 transition hover:text-red-600">
+              <button className="text-gray-600 pt-3 transition hover:text-red-600">
                 <span className="sr-only">Remove item</span>
 
                 <svg

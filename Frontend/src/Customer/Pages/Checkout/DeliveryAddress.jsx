@@ -48,8 +48,11 @@ const DeliveryAddress = () => {
 
   return (
     <div className="w-screen  grid grid-cols-12 ">
-      <div className="  col-span-4">
+      <div className="flex justify-center  col-span-6">
         <div className="flex flex-col">
+          <Typography variant="h3" color="blue-gray" className="my-2 ml-8">
+            Delivery Address
+          </Typography>
           <Card className="m-6 w-96">
             <CardBody>
               <Typography
@@ -59,7 +62,14 @@ const DeliveryAddress = () => {
               >
                 <div className="flex justify-between">
                   <Chip
-                    value={`Deliver to ${address.firstname}`}
+                    value={
+                      <>
+                        Deliver to{" "}
+                        <span className="text-yellow-800">
+                          {address.firstname}
+                        </span>
+                      </>
+                    }
                     className="px-5 w-auto text-blue-500 rounded-2xl"
                     color="info"
                     variant="outlined"
@@ -94,9 +104,9 @@ const DeliveryAddress = () => {
           </Card>
         </div>
       </div>
-      <div className=" col-span-8">
+      <div className=" col-span-6">
         <h2 className="text-2xl ">Delivery Address Information</h2>
-        <form className="flex flex-col py-3  ">
+        <form onSubmit={handleSubmit} className="flex flex-col py-3  ">
           <div className="flex m-2 my-4">
             <div className="w-72 mx-2 ml-1">
               <Input
@@ -113,6 +123,7 @@ const DeliveryAddress = () => {
                 value={name.lastname}
                 onChange={(e) => handlechange(e)}
                 label="Last Name"
+                required
               />
             </div>
           </div>
@@ -122,6 +133,7 @@ const DeliveryAddress = () => {
               value={name.address}
               onChange={(e) => handlechange(e)}
               label="Address"
+              required
             />
           </div>
           <div className="flex m-2">
@@ -131,6 +143,7 @@ const DeliveryAddress = () => {
                 value={name.city}
                 onChange={(e) => handlechange(e)}
                 label="City"
+                required
               />
             </div>
             <div className="w-72 mx-2 ml-1">
@@ -139,6 +152,7 @@ const DeliveryAddress = () => {
                 value={name.zipcode}
                 onChange={(e) => handlechange(e)}
                 label="Zip Code"
+                required
               />
             </div>
           </div>
@@ -149,6 +163,7 @@ const DeliveryAddress = () => {
                 value={name.state}
                 onChange={(e) => handlechange(e)}
                 label="State/Region"
+                required
               />
             </div>
             <div className="w-72 mx-2 ml-1">
@@ -158,15 +173,11 @@ const DeliveryAddress = () => {
                 onChange={(e) => handlechange(e)}
                 label="Phone"
                 type="number"
+                required
               />
             </div>
           </div>
-          <Button
-            onClick={handleSubmit}
-            className="mt-6 w-[590px] mx-3"
-            type="button"
-            fullWidth
-          >
+          <Button className="mt-6 w-[590px] mx-3" type="submit" fullWidth>
             Set Address
           </Button>
         </form>

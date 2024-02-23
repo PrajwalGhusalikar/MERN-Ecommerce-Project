@@ -9,6 +9,7 @@ import Cart from "./Customer/Pages/Cart/Cart";
 import { Checkout } from "./Customer/Pages/Checkout/Checkout";
 
 function App() {
+
   return (
     <div className="App">
       <Router>
@@ -30,6 +31,9 @@ function App() {
         <Routes>
           <Route exact path="/checkout" element={< Checkout />} />
         </Routes>
+        
+
+      
 
         <div className="footer">
           <Footer />

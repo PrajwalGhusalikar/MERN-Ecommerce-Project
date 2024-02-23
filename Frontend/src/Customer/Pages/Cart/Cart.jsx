@@ -21,7 +21,7 @@ const Cart = () => {
                 <dl className="space-y-0.5 text-sm text-gray-700">
                   <div className="flex justify-between">
                     <dt>Price</dt>
-                    <dd>250</dd>
+                    <dd>250₹</dd>
                   </div>
 
                   <div className="flex justify-between">
@@ -34,9 +34,9 @@ const Cart = () => {
                     <dd>-20%</dd>
                   </div>
 
-                  <div className="flex justify-between !text-base font-medium">
+                  <div className="flex justify-between !text-base font-semibold">
                     <dt>Total</dt>
-                    <dd>200</dd>
+                    <dd>200₹</dd>
                   </div>
                 </dl>
 

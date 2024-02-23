@@ -9,6 +9,9 @@ import {
 import { useLocation, useNavigate } from "react-router-dom";
 import DeliveryAddress from "./DeliveryAddress";
 import OrderSummary from "./OrderSummary";
+import PaymentCheckout from "./PaymentCheckout";
+
+
 
 export function Checkout() {
   const location = useLocation();
@@ -110,7 +113,7 @@ export function Checkout() {
       <div className="component">
         {steps === 1 && <DeliveryAddress />}
         {steps === 2 && <OrderSummary />}
-        {steps === 3 && <DeliveryAddress />}
+        {steps === 3 && <PaymentCheckout/>}
       </div>
     </>
   );
