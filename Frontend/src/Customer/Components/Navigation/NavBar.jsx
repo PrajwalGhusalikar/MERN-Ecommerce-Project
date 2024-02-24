@@ -1,4 +1,4 @@
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { Dialog, Popover, Tab, Transition } from "@headlessui/react";
 import {
   Bars3Icon,
@@ -6,12 +6,9 @@ import {
   ShoppingBagIcon,
   XMarkIcon,
   ShoppingCartIcon,
-  
-  
 } from "@heroicons/react/24/outline";
-import flag from "../../../assets/flag.png"
-import { Link } from "react-router-dom";
-
+import flag from "../../../assets/flag.png";
+import { Link, useNavigate } from "react-router-dom";
 
 const navigation = {
   categories: [
@@ -148,7 +145,17 @@ function classNames(...classes) {
 }
 
 export default function NavBar() {
+  const navigate = useNavigate();
   const [open, setOpen] = useState(false);
+  const [hidden, setHidden] = useState(false);
+
+  const handleNavigate = (category, section, item) => {
+    return (e) => {
+      e.preventDefault();
+      navigate(`/${category.id}/${section.id}/${item}`);
+      setHidden(true);
+    };
+  };
 
   return (
     <div className="bg-white z-50">
@@ -328,7 +335,7 @@ export default function NavBar() {
         </Dialog>
       </Transition.Root>
 
-      <header className="relative bg-white z-50">
+      <header className="relative bg-white z-40">
         <p className="flex h-10 items-center justify-center bg-indigo-600 px-4 text-sm font-medium text-white sm:px-6 lg:px-8">
           Get free delivery on orders over $100
         </p>
@@ -350,15 +357,15 @@ export default function NavBar() {
               </button>
 
               {/* Logo */}
-              <Link to="/"  className="ml-4 flex lg:ml-0">
-              <ShoppingCartIcon className="h-10"/>
-                  <span className="sr-only">Your Company</span>
-                
-                
+              <Link to="/" className="ml-4 flex lg:ml-0">
+                <ShoppingCartIcon className="h-10" />
+                <span className="sr-only">Your Company</span>
               </Link>
 
               {/* Flyout menus */}
-              <Popover.Group className="hidden lg:ml-8 lg:block lg:self-stretch">
+              <Popover.Group
+                className={`hidden lg:ml-8 lg:block lg:self-stretch`}
+              >
                 <div className="flex h-full space-x-8">
                   {navigation.categories.map((category) => (
                     <Popover key={category.name} className="flex">
@@ -386,7 +393,9 @@ export default function NavBar() {
                             leaveFrom="opacity-100"
                             leaveTo="opacity-0"
                           >
-                            <Popover.Panel className="absolute inset-x-0 top-full text-sm text-gray-500">
+                            <Popover.Panel
+                              className={`absolute inset-x-0 top-full text-sm text-gray-500 `}
+                            >
                               {/* Presentational element used to render the bottom shadow, if we put the shadow on the actual panel it pokes out the top, so we use this shorter element to hide the top of the shadow */}
                               <div
                                 className="absolute inset-0 top-1/2 bg-white shadow"
@@ -417,6 +426,7 @@ export default function NavBar() {
                                               className="absolute inset-0 z-10"
                                               aria-hidden="true"
                                             />
+
                                             {item.name}
                                           </a>
                                           <p
@@ -448,8 +458,12 @@ export default function NavBar() {
                                                 className="flex"
                                               >
                                                 <a
-                                                  href={item.href}
-                                                  className="hover:text-gray-800"
+                                                  className="hover:text-gray-800 hover:cursor-pointer"
+                                                  onClick={handleNavigate(
+                                                    category,
+                                                    section,
+                                                    item.name
+                                                  )}
                                                 >
                                                   {item.name}
                                                 </a>
@@ -480,12 +494,12 @@ export default function NavBar() {
                   ))} */}
 
                   {/* Remove Then */}
-                  <Link
+                  {/* <Link
                     to="/products"
                     className="flex items-center text-sm font-medium text-gray-700 hover:text-gray-800"
                   >
                     Products
-                  </Link>
+                  </Link> */}
                   <Link
                     to="/productdetails"
                     className="flex items-center text-sm font-medium text-gray-700 hover:text-gray-800"
@@ -503,6 +517,18 @@ export default function NavBar() {
                     className="flex items-center text-sm font-medium text-gray-700 hover:text-gray-800"
                   >
                     Checkout
+                  </Link>
+                  <Link
+                    to="/order"
+                    className="flex items-center text-sm font-medium text-gray-700 hover:text-gray-800"
+                  >
+                    Order
+                  </Link>
+                  <Link
+                    to="/orderstatus"
+                    className="flex items-center text-sm font-medium text-gray-700 hover:text-gray-800"
+                  >
+                    Order Status
                   </Link>
                 </div>
               </Popover.Group>

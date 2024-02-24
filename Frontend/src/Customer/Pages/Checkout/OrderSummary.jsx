@@ -17,8 +17,12 @@ const OrderSummary = () => {
 
             {/* Checkout */}
             <div className=" flex justify-end  pt-8">
-              <div className="w-96 h-56 max-w-lg space-y-4 border-2 p-4  border-gray-500">
+              <div className="w-96 h-72 max-w-lg space-y-4 border-2 p-4  border-gray-500">
                 <dl className="space-y-0.5 text-sm text-gray-700">
+                  <div className="flex justify-between text-lg">
+                    <dt>Total Items</dt>
+                    <dd className="font-semibold">5</dd>
+                  </div>
                   <div className="flex justify-between text-lg">
                     <dt>Price</dt>
                     <dd className="font-semibold">250₹</dd>

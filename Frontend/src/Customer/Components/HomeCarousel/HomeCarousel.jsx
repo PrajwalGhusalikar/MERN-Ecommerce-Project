@@ -3,9 +3,7 @@ import AliceCarousel from "react-alice-carousel";
 import "react-alice-carousel/lib/alice-carousel.css";
 import { carouselData } from "./carouselData";
 import { Carousel } from "@material-tailwind/react";
-const items = carouselData.map((items) => (
-  <img width={"100%"} src={items.img} alt="" />
-));
+
 
 const HomeCarousel = () => {
   return (
