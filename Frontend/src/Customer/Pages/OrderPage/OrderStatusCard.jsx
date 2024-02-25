@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
+import { useNavigate } from "react-router-dom";
 
 const OrderStatusCard = () => {
   const [items, setItems] = useState([
@@ -96,9 +97,11 @@ const OrderStatusCard = () => {
     setItems(newItems); // Update state with the new items array
   };
 
+  const navigate = useNavigate();
+
   return (
     <div>
-      <ul className="space-y-4">
+      <ul onClick={() => navigate(`${5}`)} className="space-y-4">
         {items.map((items, index) => (
           <li className="flex items-center gap-4">
             <img
@@ -124,7 +127,9 @@ const OrderStatusCard = () => {
             </div>
 
             <div className="flex flex-1 items-center justify-end gap-2">
-            <div className="text-sm text-gray-600 px-3 ">qty:{items.quantity}</div>
+              <div className="text-sm text-gray-600 px-3 ">
+                qty:{items.quantity}
+              </div>
               <div className="text-xl text-slate-400 px-3 ">{items.price}₹</div>
 
               <div className="flex flex-col ml-10">

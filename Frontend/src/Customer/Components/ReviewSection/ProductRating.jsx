@@ -4,7 +4,7 @@ const ProductRating = () => {
   const [rated, setRated] = useState(4);
   return (
     <div>
-      <div className="w-96">
+      <div className="sm:w-96 w-80">
         <h1 className="text-2xl my-2">Product Rating</h1>
       </div>
 

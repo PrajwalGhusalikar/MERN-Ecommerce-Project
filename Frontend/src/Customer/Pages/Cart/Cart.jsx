@@ -1,7 +1,9 @@
 import React from "react";
 import CartItems from "./CartItems";
+import { useNavigate } from "react-router-dom";
 
 const Cart = () => {
+  const navigate = useNavigate();
   return (
     <section>
       <div className="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
@@ -63,13 +65,16 @@ const Cart = () => {
                   </span>
                 </div>
 
-                <div className="flex justify-end">
-                  <a
+                <div
+                  onClick={() => navigate("/checkout?step=1")}
+                  className="flex justify-end "
+                >
+                  <p
                     href="#"
                     className="block rounded bg-green-300 px-5 py-3 text-sm text-gray-100 transition hover:bg-green-400"
                   >
                     Checkout
-                  </a>
+                  </p>
                 </div>
               </div>
             </div>

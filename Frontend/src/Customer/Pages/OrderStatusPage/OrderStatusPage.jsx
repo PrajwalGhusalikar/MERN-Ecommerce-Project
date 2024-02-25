@@ -9,32 +9,28 @@ import {
   Tooltip,
 } from "@material-tailwind/react";
 import ModeEditOutlineOutlined from "@mui/icons-material/ModeEditOutlineOutlined";
-
 import OrderStatusStepper from "./OrderStatusStepper";
-import AddressCard from "../Checkout/AddressCard";
-import OrderStatusCard from "../OrderPage/OrderStatusCard";
-import Cart from "../Cart/Cart";
 import CartItems from "../Cart/CartItems";
 
 const OrderStatusPage = () => {
   return (
     <div>
-      <div className="h-28">
+      <div className="sm:h-28">
         {" "}
         <OrderStatusStepper />
       </div>
 
-      <div className="w-screen flex justify-evenly mt-16">
-        <div className="w-96">
+      <div className="w-screen flex flex-col sm:flex-row justify-evenly mt-16">
+        <div className="sm:w-96">
           {/* Later use by props */}
           {/* <AddressCard/>  */}
 
           {/* later remove */}
-          <div className="flex flex-col">
+          <div className="flex flex-col ">
             <Typography variant="h3" color="blue-gray" className="my-2 ml-8">
               Delivery Address
             </Typography>
-            <Card className="m-6 w-96">
+            <Card className="m-6 sm:w-96">
               <CardBody>
                 <Typography
                   variant="h4"
@@ -84,10 +80,10 @@ const OrderStatusPage = () => {
             </Card>
           </div>
         </div>
-        <div className="w-full flex justify-center">
+        <div className="w-full flex justify-center ">
           {/* Ordered Cart Items */}
 
-          <div className=" w-[700px]">
+          <div className="p-4 sm:w-[700px]">
             {" "}
             <h2 className="text-3xl pb-3">Your Orders</h2>
             <CartItems />

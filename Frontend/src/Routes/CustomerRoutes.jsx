@@ -17,11 +17,31 @@ const CustomerRoutes = () => {
         <Route exact path="/" element={<HomePage />} />
       </Routes>
       <Routes>
-        <Route  path="/:levelOne/:levelTwo/:levelThree" element={<Products />} />
+        <Route
+          exact
+          path="/account/order/:pageNo"
+          element={<OrderStatusPage />}
+        />
       </Routes>
+      <Routes>
+        <Route
+          exact
+          path="/men/:levelTwo/:levelThree"
+          element={<Products />}
+        />
+      </Routes>
+      <Routes>
+        <Route
+          exact
+          path="/women/:levelTwo/:levelThree"
+          element={<Products />}
+        />
+      </Routes>
+      
+      
 
       <Routes>
-        <Route exact path="/productdetails" element={<ProductDetails />} />
+        <Route exact path="/product/:productId" element={<ProductDetails />} />
       </Routes>
 
       <Routes>
@@ -31,11 +51,9 @@ const CustomerRoutes = () => {
         <Route exact path="/checkout" element={<Checkout />} />
       </Routes>
       <Routes>
-        <Route exact path="/order" element={<Order />} />
+        <Route exact path="/account/order" element={<Order />} />
       </Routes>
-      <Routes>
-        <Route exact path="/orderstatus" element={<OrderStatusPage />} />
-      </Routes>
+
       <div className="footer">
         <Footer />
       </div>

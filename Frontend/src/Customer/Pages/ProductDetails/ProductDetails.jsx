@@ -4,6 +4,7 @@ import { Rating, Typography } from "@material-tailwind/react";
 import ReviewSection from "../../Components/ReviewSection/ReviewSection";
 import SimilarProducts from "../../Components/SimilarProducts/SimilarProducts";
 import { menskurtas } from "../../Components/HomeSectionCarousel/menskurtas";
+import { useNavigate } from "react-router-dom";
 
 const product = {
   name: "Basic Tee 6-Pack",
@@ -65,6 +66,7 @@ function classNames(...classes) {
 }
 
 export default function ProductDetails() {
+  const navigate = useNavigate();
   const [rated, setRated] = useState(4);
   const [selectedColor, setSelectedColor] = useState(product.colors[0]);
   const [selectedSize, setSelectedSize] = useState(product.sizes[2]);
@@ -113,10 +115,10 @@ export default function ProductDetails() {
           </ol>
         </nav>
 
-        <div className="grid items-start grid-cols-2 gap-4">
+        <div className="grid items-start grid-cols-1 sm:grid-cols-2 gap-4">
           {/* Image gallery */}
           <div className="grid gap-4">
-            <div className="mt-20 mx-8">
+            <div className="mt-20 h-96 sm:h-auto mx-8">
               <img
                 className="h-full w-full max-w-full rounded-lg object-cover object-center md:h-[480px]"
                 src={active}
@@ -156,7 +158,7 @@ export default function ProductDetails() {
               </p>
 
               {/* Reviews */}
-              <div className="mt-6">
+              <div className="mt-6 sm:pl-0">
                 <h3 className="sr-only">Reviews</h3>
                 <div className="flex items-center gap-2 font-bold text-blue-gray-500">
                   {rated}.7
@@ -296,6 +298,7 @@ export default function ProductDetails() {
 
                 <button
                   type="submit"
+                  onClick={() => navigate("/cart")}
                   className="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                 >
                   Add to Cart
@@ -342,7 +345,7 @@ export default function ProductDetails() {
           </div>
         </div>
         {/*Product Ratings and Review */}
-        <section>
+        <section className="sm:pl-2">
           <ReviewSection />
         </section>
 

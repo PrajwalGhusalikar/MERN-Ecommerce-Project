@@ -5,7 +5,7 @@ import ProductRating from "./ProductRating";
 const ReviewSection = () => {
   return (
     <div>
-      <div className="flex justify-evenly w-screen">
+      <div className="flex flex-col sm:flex-row justify-evenly w-screen">
         <div className="h-96 overflow-y-scroll scroll-px-0 -scroll-my-6">
           <ReviewCard />
         </div>
