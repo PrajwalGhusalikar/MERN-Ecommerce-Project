@@ -44,8 +44,8 @@ export function Checkout() {
 
   return (
     <>
-      <div className="w-full px-24 py-4">
-        <Stepper activeStep={activeStep}>
+      <div className="w-full px-10 sm:px-24 py-4">
+        <Stepper  activeStep={activeStep}>
           <Step onClick={() => setSteps(1)}>
             <UserIcon className="h-5 w-5" />
             <div className="absolute -bottom-[4.5rem] w-max text-center">

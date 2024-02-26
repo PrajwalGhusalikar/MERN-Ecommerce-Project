@@ -24,11 +24,7 @@ const CustomerRoutes = () => {
         />
       </Routes>
       <Routes>
-        <Route
-          exact
-          path="/men/:levelTwo/:levelThree"
-          element={<Products />}
-        />
+        <Route exact path="/men/:levelTwo/:levelThree" element={<Products />} />
       </Routes>
       <Routes>
         <Route
@@ -37,8 +33,6 @@ const CustomerRoutes = () => {
           element={<Products />}
         />
       </Routes>
-      
-      
 
       <Routes>
         <Route exact path="/product/:productId" element={<ProductDetails />} />

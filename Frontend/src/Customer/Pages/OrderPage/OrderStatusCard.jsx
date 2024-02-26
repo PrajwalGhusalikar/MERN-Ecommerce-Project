@@ -91,59 +91,64 @@ const OrderStatusCard = () => {
     },
   ]);
 
-  const handleChange = (e, index) => {
-    const newItems = [...items]; // Create a copy of the items array
-    newItems[index].quantity = parseInt(e.target.value); // Update quantity of the corresponding item
-    setItems(newItems); // Update state with the new items array
-  };
+  // const handleChange = (e, index) => {
+  //   const newItems = [...items]; // Create a copy of the items array
+  //   newItems[index].quantity = parseInt(e.target.value); // Update quantity of the corresponding item
+  //   setItems(newItems); // Update state with the new items array
+  // };
 
   const navigate = useNavigate();
 
   return (
     <div>
-      <ul onClick={() => navigate(`${5}`)} className="space-y-4">
+      <ul onClick={() => navigate(`${5}?step=${3}`)} className="space-y-5">
         {items.map((items, index) => (
-          <li className="flex items-center gap-4">
-            <img
-              src={items.image}
-              alt=""
-              className="size-16 rounded object-cover"
-            />
+          <li className="flex flex-col sm:flex-row items-center bg-brown-100 p-2 gap-2 sm:gap-4">
+            <div className="flex sm:w-[400px] items-center gap-2">
+              <img
+                src={items.image}
+                alt=""
+                className="size-16 rounded object-cover"
+              />
 
-            <div>
-              <h3 className="text-sm text-gray-900">{items.title}</h3>
+              <div>
+                <h3 className="text-sm text-gray-900">{items.title}</h3>
 
-              <dl className="mt-0.5 space-y-px text-[10px] text-gray-600">
-                <div>
-                  <dt className="inline">Size:</dt>
-                  <dd className="inline">{items.size}</dd>
-                </div>
+                <dl className="mt-0.5 space-y-px text-[10px] text-gray-600">
+                  <div>
+                    <dt className="inline">Size:</dt>
+                    <dd className="inline">{items.size}</dd>
+                  </div>
 
-                <div>
-                  <dt className="inline">Color:</dt>
-                  <dd className="inline">{items.color}</dd>
-                </div>
-              </dl>
-            </div>
-
-            <div className="flex flex-1 items-center justify-end gap-2">
-              <div className="text-sm text-gray-600 px-3 ">
-                qty:{items.quantity}
+                  <div>
+                    <dt className="inline">Color:</dt>
+                    <dd className="inline">{items.color}</dd>
+                  </div>
+                </dl>
               </div>
-              <div className="text-xl text-slate-400 px-3 ">{items.price}₹</div>
 
-              <div className="flex flex-col ml-10">
-                <h2 className="text-lg font-bold">
-                  {" "}
-                  <span className="text-green-500">
-                    <AccessTimeIcon />{" "}
-                  </span>
-                  Expected Delivery on march 3
-                </h2>
-                <h3 className="text-sm text-gray-600">
-                  Your order will deliver soon
-                </h3>
+              <div className="flex  items-center justify-end gap-2">
+                <div className="">
+                  <div className="text-sm text-gray-600 px-3 ">
+                    qty:{items.quantity}
+                  </div>
+                  <div className="text-xl text-slate-400 px-3 ">
+                    {items.price}₹
+                  </div>
+                </div>
               </div>
+            </div>{" "}
+            <div className="flex flex-col ml-10">
+              <h2 className="text-base font-bold">
+                {" "}
+                <span className="text-green-500">
+                  <AccessTimeIcon />{" "}
+                </span>
+                Expected Delivery on march 3
+              </h2>
+              <h3 className="text-sm pl-8 text-gray-600">
+                Your order will deliver soon
+              </h3>
             </div>
           </li>
         ))}

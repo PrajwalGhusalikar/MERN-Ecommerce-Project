@@ -16,7 +16,6 @@ import {
   Option,
 } from "@material-tailwind/react";
 import {
-  BanknotesIcon,
   CreditCardIcon,
   LockClosedIcon,
 } from "@heroicons/react/24/solid";
@@ -54,12 +53,12 @@ export default function PaymentCheckout() {
   const [cardExpires, setCardExpires] = React.useState("no");
 
   return (
-    <div className="flex justify-around">
-      <div className="w-96">
+    <div className="flex flex-col sm:flex-row m-2 justify-around">
+      <div className="sm:w-96 mt-3">
         {" "}
-        <Typography variant="h2">Payment Summary</Typography>
-        <div className=" flex justify-end pt-8">
-          <div className="w-96 h-48 max-w-lg space-y-4 border-2 p-4  border-gray-500">
+        <Typography variant="h3">Payment Summary</Typography>
+        <div className=" flex justify-center sm:justify-end sm:pt-8">
+          <div className="sm:w-96 w-80 h-48 max-w-lg space-y-4 border-2 p-4  border-gray-500">
             <dl className="space-y-0.5 text-sm text-gray-700">
               <div className="flex justify-between text-lg">
                 <dt>Price</dt>
@@ -105,7 +104,7 @@ export default function PaymentCheckout() {
           </div>
         </div>
       </div>
-      <Card className="w-full max-w-[30rem] max-h-[44rem]">
+      <Card className="w-full mt-10 sm:mt-3 max-w-[30rem] max-h-[44rem]">
         <CardHeader
           color="gray"
           floated={false}

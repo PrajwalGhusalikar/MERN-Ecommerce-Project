@@ -1,5 +1,4 @@
 import React from "react";
-import AliceCarousel from "react-alice-carousel";
 import "react-alice-carousel/lib/alice-carousel.css";
 import { carouselData } from "./carouselData";
 import { Carousel } from "@material-tailwind/react";

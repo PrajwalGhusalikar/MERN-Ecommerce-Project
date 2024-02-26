@@ -12,7 +12,7 @@ const OrderSummary = () => {
             </h1>
           </header>
 
-          <div className="mt-8 grid grid-cols-2 gap-8">
+          <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-8">
             <CartItems />
 
             {/* Checkout */}

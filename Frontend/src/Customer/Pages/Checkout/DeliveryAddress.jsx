@@ -35,16 +35,17 @@ const DeliveryAddress = () => {
   };
 
   return (
-    <div className="w-screen  grid grid-cols-12 ">
-      <div className="address-card flex justify-center  col-span-6">
+    <div className="w-screen grid sm:grid-cols-2 grid-cols-1 ">
+      <div className="address-card flex justify-center ">
         <AddressCard address={address} />
       </div>
-      <div className="Address-info col-span-6">
-        <h2 className="text-2xl ">Delivery Address Information</h2>
-        <form onSubmit={handleSubmit} className="flex flex-col py-3  ">
-          <div className="flex m-2 my-4">
-            <div className="w-72 mx-2 ml-1">
+      <div className="Address-info ">
+        <h2 className="text-2xl px-3 ">Delivery Address Information</h2>
+        <form onSubmit={handleSubmit} className="flex flex-col p-3  ">
+          <div className="flex flex-col sm:flex-row justify-between m-2 my-4">
+            <div className="sm:w-72  py-2   mx-2 ml-1">
               <Input
+              
                 name="firstname"
                 value={name.firstname}
                 onChange={(e) => handlechange(e)}
@@ -52,7 +53,7 @@ const DeliveryAddress = () => {
                 required
               />
             </div>
-            <div className="w-72 mx-2 ml-1">
+            <div className="sm:w-72  py-2 mx-2 ml-1">
               <Input
                 name="lastname"
                 value={name.lastname}
@@ -62,7 +63,7 @@ const DeliveryAddress = () => {
               />
             </div>
           </div>
-          <div className="w-[590px] mx-3">
+          <div className=" mx-3">
             <Textarea
               name="address"
               value={name.address}
@@ -71,8 +72,8 @@ const DeliveryAddress = () => {
               required
             />
           </div>
-          <div className="flex m-2">
-            <div className="w-72 mx-2 ml-1">
+          <div className="flex  flex-col sm:flex-row m-2">
+            <div className="sm:w-72 mx-2 py-2  ml-1">
               <Input
                 name="city"
                 value={name.city}
@@ -81,7 +82,7 @@ const DeliveryAddress = () => {
                 required
               />
             </div>
-            <div className="w-72 mx-2 ml-1">
+            <div className="sm:w-72  py-2 mx-2 ml-1">
               <Input
                 name="zipcode"
                 value={name.zipcode}
@@ -91,8 +92,8 @@ const DeliveryAddress = () => {
               />
             </div>
           </div>
-          <div className="flex m-2">
-            <div className="w-72 mx-2 ml-1">
+          <div className="flex flex-col sm:flex-row m-2">
+            <div className="sm:w-72 py-2  mx-2 ml-1">
               <Input
                 name="state"
                 value={name.state}
@@ -101,7 +102,7 @@ const DeliveryAddress = () => {
                 required
               />
             </div>
-            <div className="w-72 mx-2 ml-1">
+            <div className="sm:w-72 py-2 mx-2 ml-1">
               <Input
                 name="phone"
                 value={name.phone}
@@ -112,7 +113,7 @@ const DeliveryAddress = () => {
               />
             </div>
           </div>
-          <Button className="mt-6 w-[590px] mx-3" type="submit" fullWidth>
+          <Button className="mt-6  w-fit  mx-3" type="submit" fullWidth>
             Set Address
           </Button>
         </form>

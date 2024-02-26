@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useState } from "react";
 import { Dialog, Popover, Tab, Transition } from "@headlessui/react";
 import {
   Bars3Icon,
@@ -362,7 +362,7 @@ export default function NavBar() {
               <button
                 type="button"
                 className="relative rounded-md bg-white p-2 text-gray-400 lg:hidden"
-                onClick={() => setOpen(true)}
+                onClick={() => setOpen(hidden)}
               >
                 <span className="absolute -inset-0.5" />
                 <span className="sr-only">Open menu</span>
@@ -478,7 +478,9 @@ export default function NavBar() {
                                                     item.name
                                                   )}
                                                 >
-                                                  {item.name}
+                                                  <Popover.Button>
+                                                    {item.name}
+                                                  </Popover.Button>
                                                 </a>
                                               </li>
                                             ))}

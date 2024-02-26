@@ -1,10 +1,5 @@
 import React from "react";
-import { Stepper, Step, Button, Typography } from "@material-tailwind/react";
-import {
-  UserIcon,
-  BuildingLibraryIcon,
-  ShoppingCartIcon,
-} from "@heroicons/react/24/outline";
+import { Stepper, Step, Typography } from "@material-tailwind/react";
 import { useLocation, useNavigate } from "react-router-dom";
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import AssignmentTurnedInIcon from '@mui/icons-material/AssignmentTurnedIn';
@@ -26,19 +21,19 @@ export default function OrderStatusStepper() {
     setIsLastStep(steps === 5);
   }, [location.search]);
 
-  const handleNext = () => {
-    if (!isLastStep) {
-      setActiveStep((prevStep) => prevStep + 1);
-      setSteps(activeStep + 2);
-    }
-  };
+  // const handleNext = () => {
+  //   if (!isLastStep) {
+  //     setActiveStep((prevStep) => prevStep + 1);
+  //     setSteps(activeStep + 2);
+  //   }
+  // };
 
-  const handlePrev = () => {
-    if (!isFirstStep) {
-      setActiveStep((prevStep) => prevStep - 1);
-      setSteps(activeStep);
-    }
-  };
+  // const handlePrev = () => {
+  //   if (!isFirstStep) {
+  //     setActiveStep((prevStep) => prevStep - 1);
+  //     setSteps(activeStep);
+  //   }
+  // };
 
   const setSteps = (step) => {
     navigate(`?step=${step}`);
@@ -53,12 +48,12 @@ export default function OrderStatusStepper() {
           activeLineClassName="bg-green-800"
         >
           <Step
-            activeClassName=" !bg-red-300 text-white"
+            activeClassName=" !bg-red-300 "
             completedClassName="!bg-green-400 text-white"
             onClick={() => setSteps(1)}
           >
             <AddShoppingCartIcon className="h-5 w-5" />
-            <div className="absolute -bottom-[2rem] w-max text-center">
+            <div className="absolute -bottom-[2rem]  text-wrap w-max-20 mx-1 text-center">
               <Typography
                 color={activeStep === 0 ? "blue-gray" : "gray"}
                 className="font-normal"
@@ -68,27 +63,27 @@ export default function OrderStatusStepper() {
             </div>
           </Step>
           <Step
-            activeClassName=" !bg-orange-300 text-white"
+            activeClassName=" !bg-orange-300 "
             completedClassName="!bg-green-400 text-white"
             onClick={() => setSteps(2)}
           >
             < AssignmentTurnedInIcon className="h-5 w-5" />
-            <div className="absolute -bottom-[2rem] w-max text-center">
+            <div className="absolute -bottom-[3rem] text-wrap mx-1 w-max-20 text-center">
               <Typography
-                color={activeStep === 1 ? "blue-gray" : "gray"}
-                className="font-normal text-wrap"
+
+                className={`font-normal text-wrap text-${activeStep === 1 ? "slate-900" : "slate-600"}`}
               >
                 Order Confirmed
               </Typography>
             </div>
           </Step>
           <Step
-            activeClassName=" !bg-blue-300 text-white"
+            activeClassName=" !bg-blue-300 "
             completedClassName="!bg-green-400 text-white"
             onClick={() => setSteps(3)}
           >
             <LocalShippingIcon className="h-5 w-5" />
-            <div className="absolute -bottom-[2rem] w-max text-center">
+            <div className="absolute -bottom-[2rem] text-wrap mx-1 w-max-20 text-center">
               <Typography
                 color={activeStep === 2 ? "blue-gray" : "gray"}
                 className="font-normal"
@@ -98,12 +93,12 @@ export default function OrderStatusStepper() {
             </div>
           </Step>
           <Step
-            activeClassName=" !bg-blue-200 text-white"
+            activeClassName=" !bg-blue-200 "
             completedClassName="!bg-green-400 text-white"
             onClick={() => setSteps(4)}
           >
             <DeliveryDiningIcon className="h-5 w-5" />
-            <div className="absolute -bottom-[2rem] w-max text-center">
+            <div className="absolute -bottom-[3rem]  text-wrap mx-1 w-max-20 text-center">
               <Typography
                 color={activeStep === 3 ? "blue-gray" : "gray"}
                 className="font-normal text-wrap"
@@ -113,15 +108,16 @@ export default function OrderStatusStepper() {
             </div>
           </Step>
           <Step
-            activeClassName=" !bg-green-900 text-white"
+            activeClassName=" !bg-green-900 "
             completedClassName="!bg-green-700 text-white"
             onClick={() => setSteps(5)}
           >
             <PersonPinCircleIcon className="h-5 w-5" />
-            <div className="absolute -bottom-[2rem] w-max text-center">
+            <div className="absolute -bottom-[2rem] w-max mx-1 text-center">
               <Typography
                 color={activeStep === 4 ? "blue-gray" : "gray"}
                 className="font-normal"
+                variant="h6"
               >
                 Delivered
               </Typography>

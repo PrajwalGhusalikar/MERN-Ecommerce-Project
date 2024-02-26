@@ -17,7 +17,7 @@ const AddressCard = ({address}) => {
           <Typography variant="h3" color="blue-gray" className="my-2 ml-8">
             Delivery Address
           </Typography>
-          <Card className="m-6 w-96">
+          <Card className="m-6 w-80 sm:w-96">
             <CardBody>
               <Typography
                 variant="h4"

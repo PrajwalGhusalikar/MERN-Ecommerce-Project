@@ -10,7 +10,6 @@ import {
 } from "@heroicons/react/20/solid";
 import { Typography } from "@material-tailwind/react";
 import { useLocation, useNavigate } from "react-router-dom";
-import CartItems from "../Cart/CartItems";
 import OrderStatusCard from "./OrderStatusCard";
 
 const filters = [
@@ -217,7 +216,7 @@ export default function Order() {
         <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex items-baseline justify-between border-b border-gray-200 pb-6 pt-24">
             <h1 className="text-4xl font-bold tracking-tight text-gray-900">
-              New Arrivals
+              My Orders
             </h1>
 
             <div className="flex items-center">
@@ -292,7 +291,7 @@ export default function Order() {
             <div className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-4">
               {/* Filters */}
               <div className="">
-                <Typography className="text-xl opacity-50 text-black">
+                <Typography className="hidden sm:block text-xl opacity-50 text-black">
                   Filters
                 </Typography>
                 <form className="hidden lg:block">

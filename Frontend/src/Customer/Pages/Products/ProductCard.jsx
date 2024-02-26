@@ -1,5 +1,4 @@
 import React from "react";
-import { menskurtas } from "../../Components/HomeSectionCarousel/menskurtas";
 import {
   Card,
   CardHeader,
@@ -20,7 +19,7 @@ const ProductCard = ({ brand, image, title, price, discountedPrice }) => {
         <CardHeader shadow={false} floated={false} className="h-96">
           <img
             src={image}
-            alt="card-image"
+           alt=""
             className="h-full w-full object-cover"
           />
         </CardHeader>
@@ -63,7 +62,9 @@ const ProductCard = ({ brand, image, title, price, discountedPrice }) => {
           >
             Add to Cart
           </Button>
-          <button className="p-1.5 w-full sm:hidden rounded-2xl bg-blue-gray-900/10">Add to Cart</button>
+          <button className="p-1.5 w-full sm:hidden rounded-2xl bg-blue-gray-900/10">
+            Add to Cart
+          </button>
         </CardFooter>
       </Card>
     </div>
