@@ -1,7 +1,12 @@
 const app = require(".");
+const {ConnectionToDb} = require("./Configure/db")
 const PORT = 5000;
 
-app.listen(PORT, console.log("Server started at port no:", PORT));
+
+
+app.listen(PORT, async ()=>{
+await ConnectionToDb()
+});
 
 app.get("/", (req, res) => {
   return res
