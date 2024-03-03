@@ -8,7 +8,7 @@ const cartItemSchema = new Schema({
     ref: "cart",
     required: true,
   },
-  products: {
+  product: {
     type: moongoose.Schema.Types.ObjectId,
     ref: "products",
     required: true,
@@ -26,7 +26,7 @@ const cartItemSchema = new Schema({
     type: Number,
     required: true,
   },
-  Discount: {
+  discountedPrice: {
     type: Number,
     required: true,
   },
