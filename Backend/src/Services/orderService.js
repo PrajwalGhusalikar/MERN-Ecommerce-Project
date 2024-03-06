@@ -1,4 +1,5 @@
 const Address = require("../Models/addressModel");
+const Order = require("../Models/orderModel");
 const cartService = require("./cartService");
 
 const createOrder = async (user, shippingAddress) => {
@@ -28,7 +29,7 @@ const createOrder = async (user, shippingAddress) => {
       discountedPrice: item.discountedPrice,
     });
 
-    const createdOrderItem = await orderItem.save();
+    const createdOrderItem = await orderItems.save();
     orderItems.push(createdOrderItem);
   }
 
@@ -44,4 +45,97 @@ const createOrder = async (user, shippingAddress) => {
 
   const savedOrder = await createOrder.save();
   return savedOrder;
+};
+
+const placeOrder = async () => {
+  const order = await findOrderById(order);
+
+  order.orderStatus = "PLACED";
+  order.paymentDetails.status = "COMPLETED";
+  return await order.save();
+};
+
+const confirmedOrder = async () => {
+  const order = await findOrderById(order);
+
+  order.orderStatus = "CONFIRMED";
+
+  return await order.save();
+};
+
+const shippedOrder = async () => {
+  const order = await findOrderById(order);
+
+  order.orderStatus = "SHIPPED";
+
+  return await order.save();
+};
+
+const deliveredOrder = async () => {
+  const order = await findOrderById(order);
+
+  order.orderStatus = "DELIVER";
+
+  return await order.save();
+};
+
+const cancledOrder = async () => {
+  const order = await findOrderById(order);
+
+  order.orderStatus = "CANCLED";
+
+  return await order.save();
+};
+
+const findOrderById = async (orderId) => {
+  const order = await Order.findById(orderId)
+    .populate("user")
+    .populate({ path: "orderItems", populate: { path: "product" } })
+    .populate("shippingAddress");
+
+  return order;
+};
+
+const userOrderHistory = async (userId) => {
+  try {
+    const orders = await Order.find({ user: userId, orderStatus: "PLACED" })
+      .populate({ path: "orderItems", populate: { path: "product" } })
+      .lean(); //note what lean do? What is Popolate
+    return orders;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
+
+const getAllOrders = async () => {
+  try {
+    const orders = await Order.find()
+      .populate({ path: "orderItems", populate: { path: "product" } })
+      .lean(); //note what lean do? What is Popolate
+    return orders;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
+
+const deleteOrder = async (orderId) => {
+  try {
+    const order = await findOrderById(orderId);
+    await Order.findByIdAndDelete(order._id);
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
+
+module.exports = {
+  createOrder,
+  placeOrder,
+  confirmedOrder,
+  shippedOrder,
+  deliveredOrder,
+  cancledOrder,
+  findOrderById,
+  userOrderHistory,
+  getAllOrders,
+  deleteOrder,
 };
