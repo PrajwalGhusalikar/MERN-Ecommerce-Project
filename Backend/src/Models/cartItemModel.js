@@ -3,6 +3,11 @@ const moongoose = require("mongoose");
 const { Schema } = moongoose;
 
 const cartItemSchema = new Schema({
+  UserId: {
+    type: moongoose.Schema.Types.ObjectId,
+    ref: "users",
+    require: true,
+  },
   cart: {
     type: moongoose.Schema.Types.ObjectId,
     ref: "cart",
@@ -30,11 +35,7 @@ const cartItemSchema = new Schema({
     type: Number,
     required: true,
   },
-  UserId: {
-    type: moongoose.Schema.Types.ObjectId,
-    ref: "users",
-    require: true,
-  },
+
 });
 
 const CartItem = moongoose.model("cartItems", cartItemSchema);

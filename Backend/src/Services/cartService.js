@@ -2,9 +2,9 @@ const CartItem = require("../Models/cartItemModel");
 const Cart = require("../Models/cartModel");
 const Product = require("../Models/productModel");
 
-const createCart = async (user) => {
+const createCart = async (userId) => {
   try {
-    const cart = new Cart({ user }); //note why object of cart
+    const cart = new Cart({ user:userId }); //note why object of cart
     const createdCart = await cart.save();
     return createdCart;
   } catch (error) {
@@ -13,6 +13,7 @@ const createCart = async (user) => {
 };
 
 const findUserCart = async (userId) => {
+
   try {
     let cart = await Cart.findOne({ user: userId });
     let cartItems = await CartItem.find({ cart: cart._id }).populate(
@@ -60,7 +61,7 @@ const addCartItem = async (userId, req) => {
       });
 
       const createdCartItem = await cartItems.save();
-      cart.cartItems.push(createdCartItem);
+      cart.cartItems.push(createdCartItem); //note: It gives array
       await cart.save();
 
       return "Item Added To Cart";

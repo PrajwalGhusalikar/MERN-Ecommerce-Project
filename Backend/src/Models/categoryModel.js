@@ -16,7 +16,7 @@ const categorySchema = new Schema({
     type: Number,
     required: true,
   },
-});s
+});
 
 const Category = moongoose.model("categories", categorySchema);
 module.exports = Category;

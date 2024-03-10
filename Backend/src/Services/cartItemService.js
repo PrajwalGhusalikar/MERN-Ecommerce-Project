@@ -15,10 +15,10 @@ const updateCartItem = async (userId, cartItemId, cartItemData) => {
     }
     if (user._id.toString() === userId.toString()) {
       item.quantity = cartItemData.quantity;
-      item.prica = item.quantity * item.product.price;
+      item.price = item.quantity * item.product.price;
       item.discountedPice = item.quantity * item.product.discountedPice;
       const updatedCartItem = await item.save();
-      return updateCartItem;
+      return updatedCartItem;
     } else {
       throw new Error(
         "unable to update this item                                                               "
