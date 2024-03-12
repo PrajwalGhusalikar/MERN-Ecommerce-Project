@@ -19,7 +19,7 @@ const cartItemSchema = new Schema({
     required: true,
   },
   size: {
-    type: Number,
+    type: String,
     required: true,
   },
   quantity: {
@@ -33,7 +33,7 @@ const cartItemSchema = new Schema({
   },
   discountedPrice: {
     type: Number,
-    required: true,
+  
   },
 
 });

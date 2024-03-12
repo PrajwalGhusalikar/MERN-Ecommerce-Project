@@ -1,5 +1,7 @@
 const Address = require("../Models/addressModel");
+const OrderItems = require("../Models/orderItems");
 const Order = require("../Models/orderModel");
+
 const cartService = require("./cartService");
 
 const createOrder = async (user, shippingAddress) => {
@@ -20,16 +22,16 @@ const createOrder = async (user, shippingAddress) => {
   const orderItems = [];
 
   for (const item of cart.cartItems) {
-    const orderItems = new orderItems({
+    const orderItem = new OrderItems({
       price: item.price,
-      product: item.product,
+      products: item.products,
       quantity: item.quantity,
       size: item.size,
       userId: item.userId,
       discountedPrice: item.discountedPrice,
     });
 
-    const createdOrderItem = await orderItems.save();
+    const createdOrderItem = await orderItem.save();
     orderItems.push(createdOrderItem);
   }
 
@@ -43,7 +45,7 @@ const createOrder = async (user, shippingAddress) => {
     shippingAddress: address,
   });
 
-  const savedOrder = await createOrder.save();
+  const savedOrder = await createdOrder.save();
   return savedOrder;
 };
 
@@ -90,8 +92,8 @@ const cancledOrder = async () => {
 const findOrderById = async (orderId) => {
   const order = await Order.findById(orderId)
     .populate("user")
-    .populate({ path: "orderItems", populate: { path: "product" } })
-    .populate("shippingAddress");
+    .populate({ path: "orderItems", populate: { path: "products" } })
+    .populate("shippingAddress"); //note
 
   return order;
 };
@@ -99,7 +101,7 @@ const findOrderById = async (orderId) => {
 const userOrderHistory = async (userId) => {
   try {
     const orders = await Order.find({ user: userId, orderStatus: "PLACED" })
-      .populate({ path: "orderItems", populate: { path: "product" } })
+      .populate({ path: "orderItems", populate: { path: "products" } })
       .lean(); //note what lean do? What is Popolate
     return orders;
   } catch (error) {
@@ -110,7 +112,7 @@ const userOrderHistory = async (userId) => {
 const getAllOrders = async () => {
   try {
     const orders = await Order.find()
-      .populate({ path: "orderItems", populate: { path: "product" } })
+      .populate({ path: "orderItems", populate: { path: "products" } })
       .lean(); //note what lean do? What is Popolate
     return orders;
   } catch (error) {

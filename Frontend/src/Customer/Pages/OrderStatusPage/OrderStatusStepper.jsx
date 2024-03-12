@@ -1,11 +1,11 @@
 import React from "react";
 import { Stepper, Step, Typography } from "@material-tailwind/react";
 import { useLocation, useNavigate } from "react-router-dom";
-import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
-import AssignmentTurnedInIcon from '@mui/icons-material/AssignmentTurnedIn';
-import LocalShippingIcon from '@mui/icons-material/LocalShipping';
-import DeliveryDiningIcon from '@mui/icons-material/DeliveryDining';
-import PersonPinCircleIcon from '@mui/icons-material/PersonPinCircle';
+import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
+import AssignmentTurnedInIcon from "@mui/icons-material/AssignmentTurnedIn";
+import LocalShippingIcon from "@mui/icons-material/LocalShipping";
+import DeliveryDiningIcon from "@mui/icons-material/DeliveryDining";
+import PersonPinCircleIcon from "@mui/icons-material/PersonPinCircle";
 
 export default function OrderStatusStepper() {
   const location = useLocation();
@@ -21,19 +21,19 @@ export default function OrderStatusStepper() {
     setIsLastStep(steps === 5);
   }, [location.search]);
 
-  // const handleNext = () => {
-  //   if (!isLastStep) {
-  //     setActiveStep((prevStep) => prevStep + 1);
-  //     setSteps(activeStep + 2);
-  //   }
-  // };
+  const handleNext = () => {
+    if (!isLastStep) {
+      setActiveStep((prevStep) => prevStep + 1);
+      setSteps(activeStep + 2);
+    }
+  };
 
-  // const handlePrev = () => {
-  //   if (!isFirstStep) {
-  //     setActiveStep((prevStep) => prevStep - 1);
-  //     setSteps(activeStep);
-  //   }
-  // };
+  const handlePrev = () => {
+    if (!isFirstStep) {
+      setActiveStep((prevStep) => prevStep - 1);
+      setSteps(activeStep);
+    }
+  };
 
   const setSteps = (step) => {
     navigate(`?step=${step}`);
@@ -67,11 +67,12 @@ export default function OrderStatusStepper() {
             completedClassName="!bg-green-400 text-white"
             onClick={() => setSteps(2)}
           >
-            < AssignmentTurnedInIcon className="h-5 w-5" />
+            <AssignmentTurnedInIcon className="h-5 w-5" />
             <div className="absolute -bottom-[3rem] text-wrap mx-1 w-max-20 text-center">
               <Typography
-
-                className={`font-normal text-wrap text-${activeStep === 1 ? "slate-900" : "slate-600"}`}
+                className={`font-normal text-wrap text-${
+                  activeStep === 1 ? "slate-900" : "slate-600"
+                }`}
               >
                 Order Confirmed
               </Typography>
@@ -124,19 +125,19 @@ export default function OrderStatusStepper() {
             </div>
           </Step>
         </Stepper>
-        {/* <div className="mt-20 flex justify-between">
+        <div className="mt-20 flex justify-between">
           <Button onClick={handlePrev} disabled={isFirstStep}>
             Prev
           </Button>
           <Button onClick={handleNext} disabled={isLastStep}>
             Next
           </Button>
-        </div> */}
+        </div>
       </div>
       <div className="component">
-        {/* {steps === 1 && <DeliveryAddress />}
+        {steps === 1 && <DeliveryAddress />}
         {steps === 2 && <OrderSummary />}
-        {steps === 3 && <PaymentCheckout />} */}
+        {steps === 3 && <PaymentCheckout />}
       </div>
     </>
   );

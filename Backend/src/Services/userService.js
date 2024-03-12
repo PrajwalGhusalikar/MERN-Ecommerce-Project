@@ -17,7 +17,7 @@ const createUser = async (userData) => {
       lastName,
       email,
       password,
-    });
+    })
 
     console.log("Created User", user);
 

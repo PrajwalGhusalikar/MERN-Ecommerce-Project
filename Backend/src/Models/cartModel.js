@@ -30,6 +30,7 @@ const cartSchema = new Schema({
     required: true,
     default: 0,
   },
+
   discount: {
     type: Number,
     required: true,

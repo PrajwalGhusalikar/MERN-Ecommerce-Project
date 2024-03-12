@@ -2,6 +2,8 @@ const cartService = require("../Services/cartService");
 
 const findUserCart = async (req, res) => {
   const user = req.user; //note: why middleware
+
+  console.log(user)
   try {
     const cart = await cartService.findUserCart(user._id);
     return res.status(200).send(cart);

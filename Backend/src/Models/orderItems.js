@@ -6,10 +6,10 @@ const orderItemSchema = new Schema({
   products: {
     type: moongoose.Schema.Types.ObjectId,
     ref: "products",
-    required: true,
+
   },
   size: {
-    type: Number,
+    type: String,
     required: true,
   },
   quantity: {
@@ -22,7 +22,7 @@ const orderItemSchema = new Schema({
   },
   DiscountedPrice: {
     type: Number,
-    required: true,
+
   },
   UserId: {
     type: moongoose.Schema.Types.ObjectId,
