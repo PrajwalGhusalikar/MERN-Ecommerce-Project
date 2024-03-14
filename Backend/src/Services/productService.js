@@ -1,3 +1,4 @@
+
 const Category = require("../Models/categoryModel");
 const Product = require("../Models/productModel");
 
@@ -9,6 +10,7 @@ const createProduct = async (reqData) => {
       name: reqData.topLevelCategory,
       level: 1,
     });
+    await topLevel.save()  //note
   }
 
   let secondLevel = await Category.findOne({
@@ -20,8 +22,9 @@ const createProduct = async (reqData) => {
     secondLevel = new Category({
       name: reqData.secondLevelCategory,
       parentCategory: topLevel._id,
-      lavel: 2,
+      level: 2,
     });
+    await secondLevel.save()
   }
 
   let thirdLevel = await Category.findOne({
@@ -33,8 +36,9 @@ const createProduct = async (reqData) => {
     thirdLevel = new Category({
       name: reqData.thirdLevelCategory,
       parentCategory: secondLevel._id,
-      lavel: 3,
+      level: 3,
     });
+    await thirdLevel.save()
   }
 
   const product = new Product({
@@ -66,7 +70,7 @@ const updateProduct = async (productId, reqData) => {
 };
 
 const findProductById = async (id) => {
-  const product = await findById(id).populate("category").exec();
+  const product = await Product.findById(id).populate("category").exec();
   if (!product) {
     throw new Error("product not found with id: " + id);
   }
@@ -134,7 +138,7 @@ const getAllProducts = async (reqQuery) => {
     query = query.sort({ discontedPrice: sortDirection });
   }
 
-  const totalProducts = await Product.countDocumments(query);
+  const totalProducts = await Product.countDocuments(query);
   const skip = (pageNumber - 1) * pageSize;
   query = query.skip(skip).limit(pageSize);
   const products = await query.exec();

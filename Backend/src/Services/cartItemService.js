@@ -3,21 +3,27 @@ const { findById } = require("../Models/cartItemModel");
 const userService = require("../Services/userService");
 
 const updateCartItem = async (userId, cartItemId, cartItemData) => {
+  console.log("cartItemId from updatecart", cartItemId);
   try {
-    const item = await findCartItemById(cartItemId);
-    if (!item) {
+    const cartItem = await findCartItemById(cartItemId);
+    if (!cartItem) {
       throw new Error("cart item not found: ", cartItemId);
     }
-
-    const user = await userService.getUserById(item.userId);
+    console.log("cartItem.userId",cartItem)
+    const user = await userService.getUserById(cartItem.userId);
+  
     if (!user) {
-      throw new Error("cart item not found: ", userId);
+      throw new Error("user for cart not found ", userId);
+    }
+    if(!cartItem.product.discountedPrice){
+      cartItem.product.discountedPrice =   cartItem.price
     }
     if (user._id.toString() === userId.toString()) {
-      item.quantity = cartItemData.quantity;
-      item.price = item.quantity * item.product.price;
-      item.discountedPice = item.quantity * item.product.discountedPice;
-      const updatedCartItem = await item.save();
+      cartItem.quantity = cartItemData.quantity;
+      cartItem.price = cartItem.quantity * cartItem.product.price;
+      cartItem.discountedPrice =
+        cartItem.quantity * cartItem.product.discountedPrice;
+      const updatedCartItem = await cartItem.save();
       return updatedCartItem;
     } else {
       throw new Error(
@@ -33,12 +39,12 @@ const removeCartItem = async (userId, cartItemId) => {
   try {
     const cartItem = await findCartItemById(cartItemId);
     const user = await userService.getUserById(userId);
-
+    console.log("cartitem.userId", cartItem.userId);
+    console.log("user._id", user._id);
     if (user._id.toString() === cartItem.userId.toString()) {
-      await CartItem.findByIdAndDelete(cartItemId);
+      return await CartItem.findByIdAndDelete(cartItemId);
     }
-
-    throw new Error("You cant remove another user item");
+    throw new Error("You cannot access another users cart");
   } catch (error) {
     throw new Error(error.message);
   }
@@ -46,7 +52,7 @@ const removeCartItem = async (userId, cartItemId) => {
 
 const findCartItemById = async (cartItemId) => {
   try {
-    const cartItem = await findCartItemById(cartItemId);
+    const cartItem = await CartItem.findById(cartItemId).populate("product");
 
     if (cartItem) {
       return cartItem;

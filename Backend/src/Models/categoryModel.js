@@ -5,7 +5,6 @@ const { Schema } = moongoose;
 const categorySchema = new Schema({
   name: {
     type: Number,
-    required: true,
     maxlength: 40,
   },
   parentCategory: {

@@ -17,10 +17,10 @@ const register = async (req, res) => {
 
 const login = async (req, res) => {
   const { password, email } = req.body;
-  console.log("password: ", password);
+  // console.log("password: ", password);
   try {
     const user = await userService.getUserByEmail(email);
-    console.log("user: : ", user);
+    // console.log("user: : ", user);
     if (!user) {
       return res
         .status(404)

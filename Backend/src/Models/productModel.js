@@ -15,7 +15,7 @@ const productSchema = new Schema({
     type: Number,
     required: true,
   },
-  discontedPrice: {
+  discountedPrice: {
     type: Number,
   },
   discontedPercent: {
@@ -44,6 +44,12 @@ const productSchema = new Schema({
     {
       type: moongoose.Schema.Types.ObjectId,
       ref: "ratings",
+    },
+  ],
+  reviews: [
+    {
+      type: moongoose.Schema.Types.ObjectId,
+      ref: "reviews",
     },
   ],
   ratingNumbers: {

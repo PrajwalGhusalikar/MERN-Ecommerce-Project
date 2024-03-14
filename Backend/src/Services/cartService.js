@@ -16,7 +16,7 @@ const findUserCart = async (userId) => {
 
   try {
     let cart = await Cart.findOne({ user: userId });
-    let cartItems = await CartItem.find({ cart: cart._id }).populate({path:"products", strictPopulate: false }); //note why cart._id and why to populate product
+    let cartItems = await CartItem.find({ cart: cart._id }).populate({path:"product", strictPopulate: false }); //note why cart._id and why to populate product
     cart.cartItems = cartItems;
     let totalPrice = 0;
     let totalItems = 0;

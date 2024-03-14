@@ -7,7 +7,7 @@ const reviewSchema = new Schema({
     type: moongoose.Schema.Types.ObjectId,
     ref: "users",
     require: true,
-  },
+  }, 
 
   product: {
     type: moongoose.Schema.Types.ObjectId,

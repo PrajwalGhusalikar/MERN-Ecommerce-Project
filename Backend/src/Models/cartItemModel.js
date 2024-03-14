@@ -3,7 +3,7 @@ const moongoose = require("mongoose");
 const { Schema } = moongoose;
 
 const cartItemSchema = new Schema({
-  UserId: {
+  userId: {
     type: moongoose.Schema.Types.ObjectId,
     ref: "users",
     require: true,
@@ -24,7 +24,6 @@ const cartItemSchema = new Schema({
   },
   quantity: {
     type: Number,
-    required: true,
     default: 1,
   },
   price: {

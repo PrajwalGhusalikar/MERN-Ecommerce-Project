@@ -91,8 +91,8 @@ const cancledOrder = async () => {
 
 const findOrderById = async (orderId) => {
   const order = await Order.findById(orderId)
-    .populate("user")
-    .populate({ path: "orderItems", populate: { path: "products" } })
+    .populate("User")
+    .populate({ path: "orderItems", populate: { path: "product" } })
     .populate("shippingAddress"); //note
 
   return order;
@@ -101,7 +101,7 @@ const findOrderById = async (orderId) => {
 const userOrderHistory = async (userId) => {
   try {
     const orders = await Order.find({ user: userId, orderStatus: "PLACED" })
-      .populate({ path: "orderItems", populate: { path: "products" } })
+      .populate({ path: "orderItems", populate: { path: "product" } })
       .lean(); //note what lean do? What is Popolate
     return orders;
   } catch (error) {
@@ -112,7 +112,7 @@ const userOrderHistory = async (userId) => {
 const getAllOrders = async () => {
   try {
     const orders = await Order.find()
-      .populate({ path: "orderItems", populate: { path: "products" } })
+      .populate({ path: "orderItems", populate: { path: "product" } })
       .lean(); //note what lean do? What is Popolate
     return orders;
   } catch (error) {
