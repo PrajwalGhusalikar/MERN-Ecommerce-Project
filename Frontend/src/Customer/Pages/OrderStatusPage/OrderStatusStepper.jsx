@@ -1,11 +1,14 @@
 import React from "react";
-import { Stepper, Step, Typography } from "@material-tailwind/react";
+import { Stepper, Step, Typography, Button } from "@material-tailwind/react";
 import { useLocation, useNavigate } from "react-router-dom";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import AssignmentTurnedInIcon from "@mui/icons-material/AssignmentTurnedIn";
 import LocalShippingIcon from "@mui/icons-material/LocalShipping";
 import DeliveryDiningIcon from "@mui/icons-material/DeliveryDining";
 import PersonPinCircleIcon from "@mui/icons-material/PersonPinCircle";
+import DeliveryAddress from "../Checkout/DeliveryAddress"
+import OrderSummary from "../Checkout/OrderSummary"
+import PaymentCheckout from "../Checkout/PaymentCheckout"
 
 export default function OrderStatusStepper() {
   const location = useLocation();

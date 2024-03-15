@@ -9,12 +9,16 @@ import Products from "../Customer/Pages/Products/Products";
 import HomePage from "../Customer/Pages/HomePage/HomePage";
 import NavBar from "../Customer/Components/Navigation/NavBar";
 import { Routes, Route } from "react-router-dom";
+import { Login } from "../Customer/Pages/Authentication/Login";
+import SignUp from "../Customer/Pages/Authentication/SignUp";
 const CustomerRoutes = () => {
   return (
     <div>
       <NavBar />
       <Routes>
         <Route exact path="/" element={<HomePage />} />
+        <Route exact path="/login" element={<HomePage />} />
+        <Route exact path="/signup" element={<HomePage />} />
       </Routes>
       <Routes>
         <Route
