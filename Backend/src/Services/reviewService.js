@@ -11,6 +11,8 @@ const createReview = async (req, user) => {
     review: req.review,
     createdAt: new Date(),
   });
+  console.log("review", review)
+  product.reviews.push(review);
   await product.save();
   return await review.save();
 };

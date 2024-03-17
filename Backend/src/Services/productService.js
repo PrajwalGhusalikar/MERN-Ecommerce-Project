@@ -52,6 +52,7 @@ const createProduct = async (reqData) => {
     color: reqData.color,
     sizes: reqData.sizes,
     imageUrl: reqData.imageUrl,
+ 
     category: thirdLevel._id,
   });
 
