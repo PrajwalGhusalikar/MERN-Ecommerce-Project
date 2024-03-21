@@ -19,18 +19,19 @@ export function SignUp() {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen((cur) => !cur);
   const { auth } = useSelector((store) => store);
-  useEffect(() => {
-    if (jwt) {
-      dispatch(getUser());
-    }
-  }, [jwt, auth.jwt]);
 
   const [userData, setUserData] = useState({
-    fname: "",
-    lname: "",
+    firstName: "",
+    lastName: "",
     email: "",
     password: "",
   });
+
+  useEffect(() => {
+    if (jwt) {
+      dispatch(getUser(jwt));
+    }
+  }, [jwt, auth.jwt]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -39,7 +40,7 @@ export function SignUp() {
       [name]: value,
     }));
   };
-  console.log("signup data", userData);
+  // console.log("signup data", userData);
 
   const handleSubmit = () => {
     dispatch(register(userData));
@@ -73,7 +74,7 @@ export function SignUp() {
               onChange={(e) => handleChange(e)}
               label="First Name"
               size="lg"
-              name="fname"
+              name="firstName"
             />
             <Typography className="-mb-2" variant="h6">
               Your Last Name
@@ -82,7 +83,7 @@ export function SignUp() {
               onChange={(e) => handleChange(e)}
               label="Last Name"
               size="lg"
-              name="lname"
+              name="lastName"
             />
             <Typography className="-mb-2" variant="h6">
               Your Email

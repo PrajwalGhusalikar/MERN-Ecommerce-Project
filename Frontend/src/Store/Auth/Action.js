@@ -11,7 +11,7 @@ import {
   REGISTER_SUCCESS,
 } from "./ActionType";
 
-import axios from "axios"
+import axios from "axios";
 
 const api = "http://localhost:5000";
 
@@ -30,14 +30,16 @@ const getUserSuccess = (user) => ({ type: GET_USER_SUCCESS, payload: user });
 const getUserFailure = (error) => ({ type: GET_USER_FAILURE, payload: error });
 
 export const register = (userData) => async (dispatch) => {
-  dispatch(registerRequest);
+  dispatch(registerRequest());
 
   try {
-    const response = await axios.post(`${api}/api/auth/signup`, userData);
-    const user = response.userData;
+    const response = await axios.post(`${api}/auth/signup`, userData);
+    const user = response.data;
+    console.log("Inside register try", response);
     if (user.jwt) {
       localStorage.setItem("jwt", user.jwt);
     }
+    console.log("Inside register try success", user);
     dispatch(registerSuccess(user.jwt));
   } catch (error) {
     dispatch(registerFailure(error));
@@ -45,31 +47,32 @@ export const register = (userData) => async (dispatch) => {
 };
 
 export const login = (userData) => async (dispatch) => {
-  dispatch(loginRequest);
+  dispatch(loginRequest());
 
   try {
-    const response = await axios.post(`${api}/api/auth/signup`, userData);
-    const user = response.userData;
+    const response = await axios.post(`${api}/auth/signup`, userData);
+    const user = response.data;
     if (user.jwt) {
       localStorage.setItem("jwt", user.jwt);
     }
+    console.log("user", user);
     dispatch(loginSuccess(user.jwt));
   } catch (error) {
     dispatch(loginFailure(error));
   }
 };
 
-export const getUser = (userData) => async (dispatch) => {
-  dispatch(getUserRequest);
+export const getUser = (jwt) => async (dispatch) => {
+  dispatch(getUserRequest());
 
   try {
-    const response = await axios.get(`${api}/api/users/profile/`, {
+    const response = await axios.get(`${api}/users/profile`, {
       headers: {
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${jwt}`,
       },
     });
-    const user = response.userData;
-
+    const user = response.data;
+    console.log("user from getuser", user);
     dispatch(getUserSuccess(user.jwt));
   } catch (error) {
     dispatch(getUserFailure(error));
