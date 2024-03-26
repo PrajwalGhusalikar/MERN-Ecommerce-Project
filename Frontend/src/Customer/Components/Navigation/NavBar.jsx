@@ -21,7 +21,8 @@ import { Login } from "../../Pages/Authentication/Login";
 import { SignUp } from "../../Pages/Authentication/SignUp";
 
 const navigation = {
-  categories: [
+  //old-category
+  category: [
     {
       id: "women",
       name: "Women",
@@ -215,7 +216,9 @@ export default function NavBar() {
                 <Tab.Group as="div" className="mt-2">
                   <div className="border-b border-gray-200">
                     <Tab.List className="-mb-px flex space-x-8 px-4">
-                      {navigation.categories.map((category) => (
+                      
+                      {navigation.category.map((category) => (
+                        //old-category
                         <Tab
                           key={category.name}
                           className={({ selected }) =>
@@ -233,7 +236,8 @@ export default function NavBar() {
                     </Tab.List>
                   </div>
                   <Tab.Panels as={Fragment}>
-                    {navigation.categories.map((category) => (
+                    {navigation.category.map((category) => (
+                      //old-category
                       <Tab.Panel
                         key={category.name}
                         className="space-y-10 px-4 pb-8 pt-10"
@@ -386,7 +390,8 @@ export default function NavBar() {
                 className={`hidden lg:ml-8 lg:block lg:self-stretch`}
               >
                 <div className="flex h-full space-x-8">
-                  {navigation.categories.map((category) => (
+                  {navigation.category.map((category) => (
+                    //old-category
                     <Popover key={category.name} className="flex">
                       {({ open }) => (
                         <>

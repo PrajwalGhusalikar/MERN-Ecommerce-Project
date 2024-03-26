@@ -54,9 +54,9 @@ export const cartReducer = (state = initialState, action) => {
         ...state,
         loading: false,
         error: null,
-        cartItems: state.cartItems.filter((item) => {
-          item.id !== action.payload;
-        }),
+        cartItems: state.cartItems.filter((item) => 
+          item.id !== action.payload
+        ),
       };
     case REMOVE_CART_ITEM_FAILURE:
       return { ...state, loading: false, error: action.payload };
@@ -68,11 +68,14 @@ export const cartReducer = (state = initialState, action) => {
         ...state,
         loading: false,
         error: null,
-        cartItems: state.cartItems.map((item) => {
-          item.id === action.payload.id ? action.payload : item;
-        }),
+        cartItems: state.cartItems.map((item) => 
+          item.id === action.payload.id ? action.payload : item
+        ),
       };
     case UPDATE_CART_ITEM_FAILURE:
       return { ...state, loading: false, error: action.payload };
+
+    default:
+      return state; // Ensure to return state in default case
   }
 };

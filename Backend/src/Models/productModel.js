@@ -58,7 +58,7 @@ const productSchema = new Schema({
   },
   category: {
     type: moongoose.Schema.Types.ObjectId,
-    ref: "categories",
+    ref: "category",
   },
   createdAt: {
     type: Date,

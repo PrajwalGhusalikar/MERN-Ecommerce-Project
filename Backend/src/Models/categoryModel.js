@@ -4,12 +4,12 @@ const { Schema } = moongoose;
 
 const categorySchema = new Schema({
   name: {
-    type: Number,
+    type: String,
     maxlength: 40,
   },
   parentCategory: {
     type: moongoose.Schema.Types.ObjectId,
-    ref: "categories",
+    ref: "category",   //old-category
   },
   level: {
     type: Number,
@@ -17,5 +17,5 @@ const categorySchema = new Schema({
   },
 });
 
-const Category = moongoose.model("categories", categorySchema);
+const Category = moongoose.model("category", categorySchema);   //old-category
 module.exports = Category;

@@ -1,4 +1,4 @@
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { Dialog, Disclosure, Menu, Transition } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import {
@@ -12,7 +12,9 @@ import ProductCard from "./ProductCard";
 import { menskurtas } from "../../Components/HomeSectionCarousel/menskurtas";
 import { filters, singleFilter } from "./filterData";
 import { Typography } from "@material-tailwind/react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { findProducts } from "../../../Store/Products/Action";
 
 const sortOptions = [
   { name: "Most Popular", href: "#", current: true },
@@ -29,7 +31,47 @@ function classNames(...classes) {
 export default function Products() {
   const location = useLocation();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const param = useParams();
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
+
+  const decodedQueryString = decodeURIComponent(location.search);
+  const searchParamms = new URLSearchParams(decodedQueryString);
+  const colorValue = searchParamms.get("color");
+  const sizeValue = searchParamms.get("size");
+  const priceValue = searchParamms.get("price");
+  const discountValue = searchParamms.get("discount");
+  const sortValue = searchParamms.get("sort");
+  const pageNumber = searchParamms.get("page") || 1;
+  const stock = searchParamms.get("stock");
+
+  useEffect(() => {
+    const [minPrice, maxPrice] =
+      priceValue === null ? [0, 0] : priceValue.split("-").map(Number); //note
+    const data = {
+      category: param.levelThree,
+      colors: colorValue || [],
+      sizes: sizeValue || [],
+      minPrice,
+      maxPrice,
+      minDiscount: discountValue || 0,
+      sort: sortValue || "price_low",
+      pageNumber: pageNumber - 1,
+      pageSize: 10,
+      stock: stock,
+    };
+
+    dispatch(findProducts(data));
+  }, [
+    param.levelThree,
+    colorValue,
+    sizeValue,
+    priceValue,
+    discountValue,
+    sortValue,
+    pageNumber,
+    stock,
+  ]);
 
   const searchParams = new URLSearchParams(location.search);
   const handleFilter = (sectionId, value) => {
@@ -124,9 +166,9 @@ export default function Products() {
                   {/* Filters */}
 
                   <form className="mt-4 border-t border-gray-200">
-                    <h3 className="sr-only">Categories</h3>
+                    <h3 className="sr-only">category</h3>
                     {/* <ul role="list" className="px-2 py-3 font-medium text-gray-900">
-                      {subCategories.map((category) => (
+                      {subcategory.map((category) => (
                         <li key={category.name}>
                           <a href={category.href} className="block px-2 py-3">
                             {category.name}
@@ -287,9 +329,9 @@ export default function Products() {
                   Filters
                 </Typography>
                 <form className="hidden lg:block">
-                  <h3 className="sr-only">Categories</h3>
+                  <h3 className="sr-only">category</h3>
                   {/* <ul role="list" className="space-y-4 border-b border-gray-200 pb-6 text-sm font-medium text-gray-900">
-                  {subCategories.map((category) => (
+                  {subcategory.map((category) => (
                     <li key={category.name}>
                       <a href={category.href}>{category.name}</a>
                     </li>

@@ -39,5 +39,8 @@ export const orderReducer = (state = initialState, action) => {
 
     case GET_ORDER_BY_ID_FAILURE:
       return { loading: false, error: action.payload };
+
+    default:
+      return state;
   }
 };
