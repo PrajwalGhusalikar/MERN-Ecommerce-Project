@@ -9,12 +9,13 @@ import {
   Input,
   Checkbox,
 } from "@material-tailwind/react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getUser, register } from "../../../Store/Auth/Action";
 
 export function SignUp() {
   const jwt = localStorage.getItem("jwt");
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen((cur) => !cur);
@@ -30,6 +31,7 @@ export function SignUp() {
   useEffect(() => {
     if (jwt) {
       dispatch(getUser(jwt));
+      navigate("/");
     }
   }, [jwt, auth.jwt]);
 
@@ -44,6 +46,7 @@ export function SignUp() {
 
   const handleSubmit = () => {
     dispatch(register(userData));
+    setOpen(false);
   };
 
   return (
@@ -112,7 +115,7 @@ export function SignUp() {
               Sign Up
             </Button>
             <Typography variant="small" className="mt-4 flex justify-center">
-              Don&apos;t have an account?
+              Already have an account?
               <Link
                 as="a"
                 to="/login"

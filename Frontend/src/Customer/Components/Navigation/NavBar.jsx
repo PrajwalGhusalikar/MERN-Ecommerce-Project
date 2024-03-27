@@ -1,4 +1,4 @@
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { Dialog, Popover, Tab, Transition } from "@headlessui/react";
 import {
   Bars3Icon,
@@ -158,8 +158,7 @@ function classNames(...classes) {
 export default function NavBar() {
   const navigate = useNavigate();
   const location = useLocation();
-  // const token = localStorage.getItem("token");
-  const isToken = false; // temporary
+  const isToken = localStorage.getItem("jwt");
 
   const [open, setOpen] = useState(false);
   const [hidden, setHidden] = useState(false);
@@ -170,6 +169,11 @@ export default function NavBar() {
       navigate(`/${category.id}/${section.id}/${item}`);
       setHidden(true);
     };
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem("jwt");
+    navigate("/");
   };
 
   return (
@@ -216,7 +220,6 @@ export default function NavBar() {
                 <Tab.Group as="div" className="mt-2">
                   <div className="border-b border-gray-200">
                     <Tab.List className="-mb-px flex space-x-8 px-4">
-                      
                       {navigation.category.map((category) => (
                         //old-category
                         <Tab
@@ -680,7 +683,11 @@ export default function NavBar() {
                             fill="#90A4AE"
                           />
                         </svg>
-                        <Typography variant="small" className="font-medium">
+                        <Typography
+                          variant="small"
+                          className="font-medium"
+                          onClick={handleLogout}
+                        >
                           Sign Out
                         </Typography>
                       </MenuItem>
