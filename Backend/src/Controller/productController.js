@@ -40,7 +40,6 @@ const findProductById = async (req, res) => {
 };
 
 const getAllProducts = async (req, res) => {
-  const productId = req.params.id;
   try {
     const product = await productService.getAllProducts(req.query); //note:query
     return res.status(201).send(product);

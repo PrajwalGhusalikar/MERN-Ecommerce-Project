@@ -24,7 +24,7 @@ export const findProducts = (reqData) => async (dispatch) => {
   } = reqData;
   try {
     const data  = await api.get(
-      `/api/products?color=${colors}&size=${sizes}&maxPrice=${maxPrice}&minPrice=${minPrice}&minDiscount=${minDiscount}&category=${category}&stock=${stock}&sort=${sort}&pageNumber=${pageNumber}&pageSize=${pageSize}`
+      `/api/products?category=${category}&color=${colors}&size=${sizes}&maxPrice=${maxPrice}&minPrice=${minPrice}&minDiscount=${minDiscount}&stock=${stock}&sort=${sort}&pageNumber=${pageNumber}&pageSize=${pageSize}`
     );
 
     console.log("Product Data:- ", data.data);

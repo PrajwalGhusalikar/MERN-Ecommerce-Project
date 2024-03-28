@@ -42,7 +42,7 @@ export default function Products() {
   const priceValue = searchParamms.get("price");
   const discountValue = searchParamms.get("discount");
   const sortValue = searchParamms.get("sort");
-  const pageNumber = searchParamms.get("page") || 1;
+  const pageNumber = searchParamms.get("pageNumber") || 1;
   const stock = searchParamms.get("stock");
 
   useEffect(() => {
@@ -56,7 +56,8 @@ export default function Products() {
       maxPrice,
       minDiscount: discountValue || 0,
       sort: sortValue || "price_low",
-      pageNumber: pageNumber - 1,
+      // pageNumber: pageNumber - 1,//note:why we used here pageNumber -1 
+      pageNumber : pageNumber, //this is updated by me
       pageSize: 10,
       stock: stock,
     };
