@@ -51,7 +51,6 @@ const createProduct = async (reqData) => {
     color: reqData.color,
     sizes: reqData.sizes,
     imageUrl: reqData.imageUrl,
-
     category: thirdLevel._id,
   });
 
@@ -70,7 +69,7 @@ const updateProduct = async (productId, reqData) => {
 };
 
 const findProductById = async (id) => {
-  const product = await Product.findById(id).populate("category").exec();
+  const product = await Product.findById(id).populate("category").populate("reviews").exec();
   if (!product) {
     throw new Error("product not found with id: " + id);
   }
@@ -90,12 +89,12 @@ const getAllProducts = async (reqQuery) => {
     pageNumber,
     pageSize,
   } = reqQuery;
-  minPrice = Number(minPrice)
-  maxPrice = Number(maxPrice)
-  minDiscount = Number(minDiscount)
+  minPrice = Number(minPrice);
+  maxPrice = Number(maxPrice);
+  minDiscount = Number(minDiscount);
   pageSize = pageSize || 10;
-console.log('stock', stock, typeof(stock))
-  let query = Product.find().populate("category");
+  console.log("stock", stock, typeof stock);
+  let query = Product.find().populate({ path: "category", populate: { path: "parentCategory", populate: { path: "parentCategory" } } })
   // console.log("//query//-", query)
   console.log("//reqQuery//-", reqQuery);
 
@@ -110,9 +109,8 @@ console.log('stock', stock, typeof(stock))
       return { content: [], currentPage: 1, totalPages: 0 };
     }
   }
-console.log('catergory end ')
+  console.log("catergory end ");
   if (color) {
-   
     const colorSet = new Set(
       color.split(",").map((color) => color.trim().toLowerCase())
     ); //note
@@ -121,21 +119,21 @@ console.log('catergory end ')
       colorSet.size > 0 ? new RegExp([...colorSet].join("|"), "i") : null;
     query = query.where("color").regex(colorRegex); //note
   }
-  console.log('color end ')
+  console.log("color end ");
   if (sizes) {
     const sizesSet = new Set(sizes); //note what is Set
-    query= query.where("sizes.name").in([...sizesSet]);
+    query = query.where("sizes.name").in([...sizesSet]);
   }
-  console.log('size end ')
+  console.log("size end ");
   if (minPrice && maxPrice) {
-    console.log('inside min price  ', typeof(minPrice))
-    query =  query.where("discountedPrice").gte(minPrice).lte(maxPrice);
+    console.log("inside min price  ", typeof minPrice);
+    query = query.where("discountedPrice").gte(minPrice).lte(maxPrice);
   }
-  console.log('max price min price t end ')
+  console.log("max price min price t end ");
   if (minDiscount) {
-    query =  query.where("discountPercent").gt(minDiscount);
+    query = query.where("discountPercent").gt(minDiscount);
   }
-  console.log('min discount end ')
+  console.log("min discount end ");
   if (stock) {
     if (stock === "in_stock") {
       query = query.where("quantity").gt(0);
@@ -144,21 +142,21 @@ console.log('catergory end ')
       query = query.where("quantity").gt(1);
     }
   }
-  console.log('stock end ')
+  console.log("stock end ");
   if (sort) {
     const sortDirection = sort === "price_hight" ? -1 : 1;
     query = query.sort({ discontedPrice: sortDirection });
   }
-  console.log('sort end ')
+  console.log("sort end ");
   const totalProducts = await Product.countDocuments(query);
 
-  console.log()
+  console.log();
   const skip = (pageNumber - 1) * pageSize;
-  console.log('skip', skip)
+  console.log("skip", skip);
   query = query.skip(skip).limit(pageSize);
-  console.log('skip ')
+  console.log("skip ");
   const products = await query.exec();
-  console.log('products', products)
+  console.log("products", products);
   const totalPages = Math.ceil(totalProducts / pageSize);
   return { content: products, currentPage: pageNumber, totalPages };
 };

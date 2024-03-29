@@ -15,6 +15,7 @@ import { Typography } from "@material-tailwind/react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { findProducts } from "../../../Store/Products/Action";
+import { ProductPagination } from "./ProductPagination";
 
 const sortOptions = [
   { name: "Most Popular", href: "#", current: true },
@@ -34,6 +35,20 @@ export default function Products() {
   const dispatch = useDispatch();
   const param = useParams();
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
+  const { product } = useSelector((store) => store);
+  console.log("product map-", product.products.data);
+
+  const [activepageNumber, setpageNumber] = useState(1);
+
+  const handlePagination = (activepageNumber) => {
+    const searchParamms = new URLSearchParams(location.search);
+    searchParamms.set("page", activepageNumber);
+    const query = searchParamms.toString();
+    navigate({ search: `${query}` });
+  };
+  useEffect(() => {
+    handlePagination(activepageNumber);
+  }, [activepageNumber]);
 
   const decodedQueryString = decodeURIComponent(location.search);
   const searchParamms = new URLSearchParams(decodedQueryString);
@@ -42,7 +57,7 @@ export default function Products() {
   const priceValue = searchParamms.get("price");
   const discountValue = searchParamms.get("discount");
   const sortValue = searchParamms.get("sort");
-  const pageNumber = searchParamms.get("pageNumber") || 1;
+  const pageNumber = searchParamms.get("page") || 1;
   const stock = searchParamms.get("stock");
 
   useEffect(() => {
@@ -56,9 +71,9 @@ export default function Products() {
       maxPrice,
       minDiscount: discountValue || 0,
       sort: sortValue || "price_low",
-      // pageNumber: pageNumber - 1,//note:why we used here pageNumber -1 
-      pageNumber : pageNumber, //this is updated by me
-      pageSize: 10,
+      // pageNumber: pageNumber - 1,//note:why we used here pageNumber -1
+      pageNumber: pageNumber, //this is updated by me
+      pageSize: 9,
       stock: stock,
     };
 
@@ -466,10 +481,11 @@ export default function Products() {
               {/* Product grid */}
               <div className="lg:col-span-3">
                 <div className="flex flex-wrap sm:justify-between  justify-evenly   ">
-                  {menskurtas.map((items, index) => (
+                  {product.products?.data?.content?.map((items, index) => (
                     <ProductCard
-                      key={items.id}
-                      image={items.image}
+                      key={items._id}
+                      productId = {items._id}
+                      imageUrl={items.imageUrl}
                       brand={items.brand}
                       title={items.title}
                       price={items.price}
@@ -479,6 +495,9 @@ export default function Products() {
                 </div>
               </div>
             </div>
+          </section>
+          <section className="flex justify-center h-28">
+            <ProductPagination setpageNumber={setpageNumber} />
           </section>
         </main>
       </div>

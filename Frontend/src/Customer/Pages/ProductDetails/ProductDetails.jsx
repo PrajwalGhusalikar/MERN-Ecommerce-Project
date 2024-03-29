@@ -1,10 +1,12 @@
-import { React, useState } from "react";
+import { React, useEffect, useState } from "react";
 import { RadioGroup } from "@headlessui/react";
 import { Rating, Typography } from "@material-tailwind/react";
 import ReviewSection from "../../Components/ReviewSection/ReviewSection";
 import SimilarProducts from "../../Components/SimilarProducts/SimilarProducts";
 import { menskurtas } from "../../Components/HomeSectionCarousel/menskurtas";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { findProductById } from "../../../Store/Products/Action";
 
 const product = {
   name: "Basic Tee 6-Pack",
@@ -73,6 +75,19 @@ export default function ProductDetails() {
   const [active, setActive] = useState(
     "https://tailwindui.com/img/ecommerce-images/product-page-02-secondary-product-shot.jpg"
   );
+
+  const params = useParams();
+  const dispatch = useDispatch();
+  const productById = useSelector((store) => store);
+  // console.log("productById=,", productById.product.product)
+  const productData = productById.product.product;
+  console.log("Product Data: ", productData);
+
+  useEffect(() => {
+    const data = { productId: params.productId };
+    dispatch(findProductById(data));
+  }, [params.productId]);
+
   return (
     <div className="bg-white">
       <div className="pt-6">
@@ -88,7 +103,8 @@ export default function ProductDetails() {
                     href={breadcrumb.href}
                     className="mr-2 text-sm font-medium text-gray-900"
                   >
-                    {breadcrumb.name}
+                    {productData.category.name}
+                    {/* category */}
                   </a>
                   <svg
                     width={16}
@@ -109,7 +125,8 @@ export default function ProductDetails() {
                 aria-current="page"
                 className="font-medium text-gray-500 hover:text-gray-600"
               >
-                {product.name}
+                {productData.brand}
+                {/* product brand */}
               </a>
             </li>
           </ol>
@@ -121,7 +138,9 @@ export default function ProductDetails() {
             <div className="mt-20 h-96 sm:h-auto mx-8">
               <img
                 className="h-full w-full max-w-full rounded-lg object-cover object-center md:h-[480px]"
-                src={active}
+                // src={active}
+                src={productData.imageUrl}
+                // product image
                 alt=""
               />
             </div>
@@ -146,7 +165,8 @@ export default function ProductDetails() {
           <div className="mx-auto max-w-2xl px-4 pb-16 pt-10 sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-1 lg:grid-rows-[auto,auto,1fr] lg:gap-x-8 lg:px-8 lg:pb-10 lg:pt-16">
             <div className="lg:col-span-2 lg:border-r lg:border-gray-200 lg:pr-8">
               <h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
-                {product.name}
+                {productData.title}
+                {/* product title */}
               </h1>
             </div>
 
@@ -154,7 +174,7 @@ export default function ProductDetails() {
             <div className="mt-4 lg:row-span-3 lg:mt-0">
               <h2 className="sr-only">Product information</h2>
               <p className="text-5xl my-2 mb-0 tracking-tight text-gray-900">
-                {product.price}
+                {productData.price} /-
               </p>
 
               {/* Reviews */}
@@ -236,14 +256,14 @@ export default function ProductDetails() {
                       Choose a size
                     </RadioGroup.Label>
                     <div className="grid grid-cols-4 gap-4 sm:grid-cols-8 lg:grid-cols-4">
-                      {product.sizes.map((size) => (
+                      {productData.sizes.map((size) => (
                         <RadioGroup.Option
                           key={size.name}
-                          value={size}
-                          disabled={!size.inStock}
+                          value={size.name}
+                          disabled={!size.quantity}
                           className={({ active }) =>
                             classNames(
-                              size.inStock
+                              size.quantity
                                 ? "cursor-pointer bg-white text-gray-900 shadow-sm"
                                 : "cursor-not-allowed bg-gray-50 text-gray-200",
                               active ? "ring-2 ring-indigo-500" : "",
@@ -256,7 +276,7 @@ export default function ProductDetails() {
                               <RadioGroup.Label as="span">
                                 {size.name}
                               </RadioGroup.Label>
-                              {size.inStock ? (
+                              {size.quantity ? (
                                 <span
                                   className={classNames(
                                     active ? "border" : "border-2",

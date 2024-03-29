@@ -34,11 +34,13 @@ export const findProducts = (reqData) => async (dispatch) => {
   }
 };
 
-const findProductById = (reqData) => async (dispatch) => {
+export const findProductById = (reqData) => async (dispatch) => {
+  console.log("reqData", reqData)
   dispatch({ type: FIND_PRODUCT_BY_ID_REQUEST });
   const { productId } = reqData;
   try {
-    const { data } = api.get(`/api/products/id/${productId}`);
+    const { data } =await api.get(`/api/products/id/${productId}`);
+    console.log("Product-data-id: ", data)
     dispatch({ type: FIND_PRODUCT_BY_ID_SUCCESS, payload: data });
   } catch (error) {
     dispatch({ type: FIND_PRODUCT_BY_ID_FAILURE, payload: error.message });

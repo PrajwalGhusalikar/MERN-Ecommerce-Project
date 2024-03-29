@@ -33,7 +33,7 @@ export const customerProductReducer = (state = initialState, action) => {
         ...state,
         loading: false,
         error: null,
-        products: action.payload,
+        product: action.payload,
       };
 
     case FIND_PRODUCTS_FAILURE:
