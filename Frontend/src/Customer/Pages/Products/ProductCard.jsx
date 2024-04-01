@@ -17,7 +17,7 @@ const ProductCard = ({
   productId,
 }) => {
   const navigate = useNavigate();
-  console.log("productId=", productId);
+  // console.log("productId=", productId);
   return (
     <div>
       <Card

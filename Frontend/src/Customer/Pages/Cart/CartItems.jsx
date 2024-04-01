@@ -1,165 +1,83 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { removeCartItem, updateCartItem } from "../../../Store/Cart/Action";
 
-const CartItems = () => {
-  const [items, setItems] = useState([
-    {
-      image:
-        "https://rukminim1.flixcart.com/image/612/612/l5h2xe80/kurta/x/6/n/xl-kast-tile-green-majestic-man-original-imagg4z33hu4kzpv.jpeg?q=70",
-      brand: "Majestic Man",
-      title: "Men Printed Pure Cotton Straight Kurta",
-      color: "Green",
-      discountedPrice: 499,
-      price: 1499,
-      discountPersent: 66,
-      size: "S",
-      quantity: 100,
-      topLavelCategory: "Men",
-      secondLavelCategory: "Clothing",
-      thirdLavelCategory: "mens_kurta",
-      description:
-        "A traditional garment embodying elegance and grace. Crafted from fine fabrics, it features intricate embroidery and a relaxed fit, providing comfort and style.",
-    },
-    {
-      image:
-        "https://rukminim1.flixcart.com/image/612/612/xif0q/kurta/l/f/r/xl-k-spl668-yellow-sg-leman-original-imagznqcrahgq9rf.jpeg?q=70",
-      brand: "SG LEMAN",
-      title: "Men Embroidered Jacquard Straight Kurta",
-      color: "Yellow",
-      discountedPrice: 799,
-      price: 2499,
-      discountPersent: 68,
-      size: "S",
-      quantity: 100,
-      topLavelCategory: "Men",
-      secondLavelCategory: "Clothing",
-      thirdLavelCategory: "mens_kurta",
-      description:
-        "A traditional garment embodying elegance and grace. Crafted from fine fabrics, it features intricate embroidery and a relaxed fit, providing comfort and style.",
-    },
-    {
-      image:
-        "https://rukminim1.flixcart.com/image/612/612/xif0q/kurta/g/6/k/m-sksh-dt1105-pcbl-fubar-original-imafux247zhqym2z-bb.jpeg?q=70",
-      brand: "FUBAR",
-      title: "Men Printed Cotton Blend Straight Kurta",
-      color: "Blue",
-      discountedPrice: 399,
-      price: 1499,
-      discountPersent: 73,
-      size: "S",
-      quantity: 100,
-      topLavelCategory: "Men",
-      secondLavelCategory: "Clothing",
-      thirdLavelCategory: "mens_kurta",
-      description:
-        "A traditional garment embodying elegance and grace. Crafted from fine fabrics, it features intricate embroidery and a relaxed fit, providing comfort and style.",
-    },
-    {
-      image:
-        "https://rukminim1.flixcart.com/image/612/612/xif0q/kurta/i/v/x/xxl-br-ad-kt-105-adwyn-peter-original-imagj4zyd2q7t6cg.jpeg?q=70",
-      brand: "ALY JOHN",
-      title: "Men Solid Pure Cotton Straight Kurta",
-      color: "White",
-      discountedPrice: 474,
-      price: 1999,
-      discountPersent: 76,
-      size: "S",
-      quantity: 100,
-      topLavelCategory: "Men",
-      secondLavelCategory: "Clothing",
-      thirdLavelCategory: "mens_kurta",
-      description:
-        "A traditional garment embodying elegance and grace. Crafted from fine fabrics, it features intricate embroidery and a relaxed fit, providing comfort and style.",
-    },
-    {
-      image:
-        "https://rukminim1.flixcart.com/image/612/612/xif0q/kurta/j/a/r/l-poch521835-peter-england-original-imag7jg47g7cxhg3-bb.jpeg?q=70",
-      brand: "PETER ENGLAND",
-      title: "Men Woven Design Pure Cotton Straight Kurta",
-      color: "Grey",
-      discountedPrice: 524,
-      price: 1049,
-      discountPersent: 50,
-      size: "S",
-      quantity: 100,
-      topLavelCategory: "Men",
-      secondLavelCategory: "Clothing",
-      thirdLavelCategory: "mens_kurta",
-      description:
-        "A traditional garment embodying elegance and grace. Crafted from fine fabrics, it features intricate embroidery and a relaxed fit, providing comfort and style.",
-    },
-  ]);
+const CartItems = ({ items }) => {
+  const dispatch = useDispatch();
 
-  const handleChange = (e, index) => {
-    const newItems = [...items]; // Create a copy of the items array
-    newItems[index].quantity = parseInt(e.target.value); // Update quantity of the corresponding item
-    setItems(newItems); // Update state with the new items array
+  const handleUpdateCart = (num) => {
+    const data = {
+      data: { quantity: items.quantity + num },
+      cartItemId: items?._id,
+    };
+    dispatch(updateCartItem(data));
+  };
+
+  const handleRemoveCart = (id) => {
+    dispatch(removeCartItem(id));
   };
 
   return (
-    <div>
+    <div className="m-2">
       <ul className="space-y-4">
-        {items.map((items, index) => (
-          <li className="flex items-center gap-3">
-            <img
-              src={items.image}
-              alt=""
-              className="size-20  rounded object-cover"
-            />
+        <li className="flex items-center gap-3">
+          <img
+            src={items?.product?.imageUrl}
+            alt=""
+            className="size-20  rounded object-cover"
+          />
 
-            <div className="w-28">
-              <h3 className="text-xs sm:text-sm text-gray-900 w-28">{items.title}</h3>
+          <div className="">
+            <h3 className="text-xs sm:text-sm text-gray-900 w-48">
+              {items?.product?.title}
+            </h3>
 
-              <dl className="mt-0.5 space-y-px text-[10px] text-gray-600">
-                <div>
-                  <dt className="inline">Size:</dt>
-                  <dd className="inline">{items.size}</dd>
-                </div>
-
-                <div>
-                  <dt className="inline">Color:</dt>
-                  <dd className="inline">{items.color}</dd>
-                </div>
-              </dl>
-            </div>
-
-            <div className="flex flex-1 items-center justify-end gap-2">
-              <div className="sm:text-xl text-green-400 px-1 pt-1 text-sm">
-                {items.price}₹
+            <dl className="mt-0.5 space-y-px text-[10px] text-gray-600">
+              <div>
+                <dt className="inline">Size:</dt>
+                <dd className="inline">{items?.size}</dd>
               </div>
-              <form>
-                <label className="text-sm"> Quantity </label>
 
-                <input
-                  type="number"
-                  min="1"
-                  value={items.quantity}
-                  onChange={(e) => handleChange(e, index)}
-                  id="Line1Qty"
-                  className="h-8 w-12 rounded border-gray-200 bg-gray-50 p-0 text-center text-xs text-gray-600 [-moz-appearance:_textfield] focus:outline-none [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none"
-                />
-              </form>
+              <div>
+                <dt className="inline">Color:</dt>
+                <dd className="inline">{items?.product?.color}</dd>
+              </div>
+            </dl>
+          </div>
 
-              <button className="text-gray-600 pt-3 transition hover:text-red-600">
-                <span className="sr-only">Remove item</span>
-
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth="1.5"
-                  stroke="currentColor"
-                  className="h-4 w-4"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"
-                  />
-                </svg>
-              </button>
+          <div className="flex flex-1 items-center justify-end gap-2">
+            <div className="sm:text-xl text-green-400 px-1 pt-1 text-sm">
+              {items?.price}₹
             </div>
-          </li>
-        ))}
+            <form>
+              <label className="text-sm w-20 flex items-center justify-around rounded-xl bg-yellow-200">
+                {" "}
+                <button disabled={items?.quantity <= 1}>
+                  {" "}
+                  <i
+                    className="fa-solid fa-circle-minus"
+                    onClick={() => handleUpdateCart(-1)}
+                  ></i>
+                </button>
+                <p className="w-6 text-center"> {items?.quantity}</p>
+                <button>
+                  {" "}
+                  <i
+                    className="fa-solid fa-circle-plus"
+                    onClick={() => handleUpdateCart(1)}
+                  ></i>
+                </button>
+              </label>
+            </form>
+
+            <button
+              className="text-gray-600 transition hover:text-red-600"
+              onClick={() => handleRemoveCart(items?._id)}
+            >
+              <i className="fa-solid fa-trash"></i>
+            </button>
+          </div>
+        </li>
       </ul>
     </div>
   );

@@ -47,9 +47,9 @@ const navigation = {
       sections: [
         {
           id: "clothing",
-          name: "Clothing",
+          name: "clothing",
           items: [
-            { name: "Tops", href: "#" },
+            { name: "mens_kurta", href: "#" },
             { name: "Dresses", href: "#" },
             { name: "Pants", href: "#" },
             { name: "Denim", href: "#" },
@@ -87,7 +87,7 @@ const navigation = {
     },
     {
       id: "men",
-      name: "Men",
+      name: "men",
       featured: [
         {
           name: "New Arrivals",
@@ -109,9 +109,9 @@ const navigation = {
       sections: [
         {
           id: "clothing",
-          name: "Clothing",
+          name: "clothing",
           items: [
-            { name: "Tops", href: "#" },
+            { name: "mens_kurta", href: "#" },
             { name: "Pants", href: "#" },
             { name: "Sweaters", href: "#" },
             { name: "T-Shirts", href: "#" },

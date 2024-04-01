@@ -1,9 +1,24 @@
-import React from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import CartItems from "./CartItems";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { getCart } from "../../../Store/Cart/Action";
 
 const Cart = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const cart = useSelector((store) => store.cart);
+
+  // Memoize the selector function using useMemo
+  const allCartItems = useMemo(() => cart.cart?.data?.cartItems, [cart]);
+
+  useEffect(() => {
+    console.log("Component mounted");
+    dispatch(getCart());
+  }, [cart.updateCartItems , cart.deleteCartItem]);
+
+  // console.log("Rendering Cart component"); // Add console log to check re-renders
+
   return (
     <section>
       <div className="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
@@ -15,15 +30,18 @@ const Cart = () => {
           </header>
 
           <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-8">
-            <CartItems />
-
+            <div className="">
+              {allCartItems?.map((items) => {
+                return <CartItems key={items._id} items={items} />;
+              })}
+            </div>
             {/* Checkout */}
             <div className=" flex justify-end  pt-8">
               <div className="w-96 h-60 max-w-lg space-y-4 border-2 p-4 border-gray-500">
                 <dl className="space-y-0.5 text-sm text-gray-700">
                   <div className="flex justify-between">
                     <dt>Price</dt>
-                    <dd>250₹</dd>
+                    <dd>{cart.cart?.data?.totalPrice}</dd>
                   </div>
 
                   <div className="flex justify-between">
@@ -33,12 +51,16 @@ const Cart = () => {
 
                   <div className="flex justify-between">
                     <dt>Discount</dt>
-                    <dd>-20%</dd>
+                    <dd>{cart.cart?.data?.discount}%</dd>
                   </div>
 
+                  <div className="flex justify-between">
+                    <dt>Total Items</dt>
+                    <dd>{cart.cart?.data?.totalItems} item</dd>
+                  </div>
                   <div className="flex justify-between !text-base font-semibold">
                     <dt>Total</dt>
-                    <dd>200₹</dd>
+                    <dd>{cart.cart?.data?.totalPrice}₹</dd>
                   </div>
                 </dl>
 

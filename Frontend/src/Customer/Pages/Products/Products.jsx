@@ -36,7 +36,7 @@ export default function Products() {
   const param = useParams();
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   const { product } = useSelector((store) => store);
-  console.log("product map-", product.products.data);
+  // console.log("product map-", product.products.data);
 
   const [activepageNumber, setpageNumber] = useState(1);
 

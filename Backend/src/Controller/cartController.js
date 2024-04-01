@@ -3,7 +3,7 @@ const cartService = require("../Services/cartService");
 const findUserCart = async (req, res) => {
   const user = req.user; //note: why middleware
 
-  console.log(user)
+  console.log(user);
   try {
     const cart = await cartService.findUserCart(user._id);
     return res.status(200).send(cart);
@@ -16,7 +16,7 @@ const addItemToCart = async (req, res) => {
   const user = req.user; //note: why middleware
   try {
     const cartItem = await cartService.addCartItem(user._id, req.body);
-    return res.status(200).send(cartItem);
+    return res.status(200).send("Item Added to cart Successfully");
   } catch (error) {
     return res.status(500).send({ error: error.message });
   }

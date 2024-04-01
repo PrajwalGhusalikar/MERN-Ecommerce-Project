@@ -7,8 +7,8 @@ import { menskurtas } from "../../Components/HomeSectionCarousel/menskurtas";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { findProductById } from "../../../Store/Products/Action";
-
-const product = {
+import { addItemToCart } from "../../../Store/Cart/Action";
+const productDemo = {
   name: "Basic Tee 6-Pack",
   price: "$192",
   href: "#",
@@ -70,23 +70,31 @@ function classNames(...classes) {
 export default function ProductDetails() {
   const navigate = useNavigate();
   const [rated, setRated] = useState(4);
-  const [selectedColor, setSelectedColor] = useState(product.colors[0]);
-  const [selectedSize, setSelectedSize] = useState(product.sizes[2]);
+  const [selectedColor, setSelectedColor] = useState(productDemo.colors[0]);
+  const [selectedSize, setSelectedSize] = useState(productDemo.sizes[2]);
   const [active, setActive] = useState(
     "https://tailwindui.com/img/ecommerce-images/product-page-02-secondary-product-shot.jpg"
   );
 
   const params = useParams();
   const dispatch = useDispatch();
-  const productById = useSelector((store) => store);
-  // console.log("productById=,", productById.product.product)
-  const productData = productById.product.product;
+  const product = useSelector(store => store.product);
+  console.log("productById=,", product)
+  const productData = product.product;
   console.log("Product Data: ", productData);
 
   useEffect(() => {
     const data = { productId: params.productId };
     dispatch(findProductById(data));
   }, [params.productId]);
+
+
+  const handleAddToCart = ()=>{
+    const data = { productId: params.productId , size: "S" };
+    dispatch(addItemToCart(data));
+    navigate("/cart")
+  }
+ 
 
   return (
     <div className="bg-white">
@@ -96,14 +104,14 @@ export default function ProductDetails() {
             role="list"
             className="mx-auto flex max-w-2xl items-center space-x-2 px-4 sm:px-6 lg:max-w-7xl lg:px-8"
           >
-            {product.breadcrumbs.map((breadcrumb) => (
+            {productDemo.breadcrumbs.map((breadcrumb) => (
               <li key={breadcrumb.id}>
                 <div className="flex items-center">
                   <a
                     href={breadcrumb.href}
                     className="mr-2 text-sm font-medium text-gray-900"
                   >
-                    {productData.category.name}
+                    {/* {productDemoData.category.name} */}
                     {/* category */}
                   </a>
                   <svg
@@ -121,11 +129,11 @@ export default function ProductDetails() {
             ))}
             <li className="text-sm">
               <a
-                href={product.href}
+                href={productDemo.href}
                 aria-current="page"
                 className="font-medium text-gray-500 hover:text-gray-600"
               >
-                {productData.brand}
+                {productData?.brand}
                 {/* product brand */}
               </a>
             </li>
@@ -139,13 +147,13 @@ export default function ProductDetails() {
               <img
                 className="h-full w-full max-w-full rounded-lg object-cover object-center md:h-[480px]"
                 // src={active}
-                src={productData.imageUrl}
+                src={productData?.imageUrl}
                 // product image
                 alt=""
               />
             </div>
             <div className="flex justify-around">
-              {product.images.map((item) => (
+              {productDemo.images.map((item) => (
                 <div className="">
                   <img
                     onClick={() => setActive(item.src)}
@@ -165,7 +173,7 @@ export default function ProductDetails() {
           <div className="mx-auto max-w-2xl px-4 pb-16 pt-10 sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-1 lg:grid-rows-[auto,auto,1fr] lg:gap-x-8 lg:px-8 lg:pb-10 lg:pt-16">
             <div className="lg:col-span-2 lg:border-r lg:border-gray-200 lg:pr-8">
               <h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
-                {productData.title}
+                {productData?.title}
                 {/* product title */}
               </h1>
             </div>
@@ -174,7 +182,7 @@ export default function ProductDetails() {
             <div className="mt-4 lg:row-span-3 lg:mt-0">
               <h2 className="sr-only">Product information</h2>
               <p className="text-5xl my-2 mb-0 tracking-tight text-gray-900">
-                {productData.price} /-
+                {productData?.price} /-
               </p>
 
               {/* Reviews */}
@@ -206,7 +214,7 @@ export default function ProductDetails() {
                       Choose a color
                     </RadioGroup.Label>
                     <div className="flex items-center space-x-3">
-                      {product.colors.map((color) => (
+                      {productDemo.colors.map((color) => (
                         <RadioGroup.Option
                           key={color.name}
                           value={color}
@@ -256,7 +264,7 @@ export default function ProductDetails() {
                       Choose a size
                     </RadioGroup.Label>
                     <div className="grid grid-cols-4 gap-4 sm:grid-cols-8 lg:grid-cols-4">
-                      {productData.sizes.map((size) => (
+                      {productData?.sizes.map((size) => (
                         <RadioGroup.Option
                           key={size.name}
                           value={size.name}
@@ -316,14 +324,14 @@ export default function ProductDetails() {
                   </RadioGroup>
                 </div>
 
-                <button
-                  type="submit"
-                  onClick={() => navigate("/cart")}
+                
+              </form>
+              <button
+                  onClick={handleAddToCart}
                   className="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                 >
                   Add to Cart
                 </button>
-              </form>
             </div>
 
             <div className="py-10 lg:col-span-2 lg:col-start-1 lg:border-r lg:border-gray-200 lg:pb-16 lg:pr-8 lg:pt-6">
@@ -333,7 +341,7 @@ export default function ProductDetails() {
 
                 <div className="space-y-6">
                   <p className="text-base text-gray-900">
-                    {product.description}
+                    {productDemo.description}
                   </p>
                 </div>
               </div>
@@ -345,7 +353,7 @@ export default function ProductDetails() {
 
                 <div className="mt-4">
                   <ul role="list" className="list-disc space-y-2 pl-4 text-sm">
-                    {product.highlights.map((highlight) => (
+                    {productDemo.highlights.map((highlight) => (
                       <li key={highlight} className="text-gray-400">
                         <span className="text-gray-600">{highlight}</span>
                       </li>
@@ -358,7 +366,7 @@ export default function ProductDetails() {
                 <h2 className="text-sm font-medium text-gray-900">Details</h2>
 
                 <div className="mt-4 space-y-6">
-                  <p className="text-sm text-gray-600">{product.details}</p>
+                  <p className="text-sm text-gray-600">{productDemo.details}</p>
                 </div>
               </div>
             </div>
