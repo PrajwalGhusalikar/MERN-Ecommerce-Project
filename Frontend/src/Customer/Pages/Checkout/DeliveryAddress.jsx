@@ -2,36 +2,25 @@ import React, { useState } from "react";
 
 import { Button, Input, Textarea } from "@material-tailwind/react";
 import AddressCard from "./AddressCard";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { createOrder } from "../../../Store/Orders/Action";
 
 const DeliveryAddress = () => {
-  const [name, setName] = useState({
-    firstname: "",
-    lastname: "",
-    address: "",
-    city: "",
-    zipcode: "",
-    state: "",
-    phone: "",
-  });
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const [address, setAddress] = useState({
-    firstname: "Demo",
-    lastname: "Name",
-    address: "Demo",
-    city: "City",
-    zipcode: "444444",
-    state: "State",
-    phone: "123456",
-  });
+  const [address, setAddress] = useState({});
 
   const handlechange = (e) => {
     e.preventDefault();
-    setName({ ...name, [e.target.name]: e.target.value });
+    setAddress({ ...address, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setAddress(name);
+    const orderData = { address, navigate };
+    dispatch(createOrder(orderData));
   };
 
   return (
@@ -45,9 +34,8 @@ const DeliveryAddress = () => {
           <div className="flex flex-col sm:flex-row justify-between m-2 my-4">
             <div className="sm:w-72  py-2   mx-2 ml-1">
               <Input
-              
-                name="firstname"
-                value={name.firstname}
+                name="firstName"
+                value={address.firstName}
                 onChange={(e) => handlechange(e)}
                 label="First Name"
                 required
@@ -55,8 +43,8 @@ const DeliveryAddress = () => {
             </div>
             <div className="sm:w-72  py-2 mx-2 ml-1">
               <Input
-                name="lastname"
-                value={name.lastname}
+                name="lastName"
+                value={address.lastName}
                 onChange={(e) => handlechange(e)}
                 label="Last Name"
                 required
@@ -66,7 +54,7 @@ const DeliveryAddress = () => {
           <div className=" mx-3">
             <Textarea
               name="address"
-              value={name.address}
+              value={address.address}
               onChange={(e) => handlechange(e)}
               label="Address"
               required
@@ -76,7 +64,7 @@ const DeliveryAddress = () => {
             <div className="sm:w-72 mx-2 py-2  ml-1">
               <Input
                 name="city"
-                value={name.city}
+                value={address.city}
                 onChange={(e) => handlechange(e)}
                 label="City"
                 required
@@ -84,8 +72,8 @@ const DeliveryAddress = () => {
             </div>
             <div className="sm:w-72  py-2 mx-2 ml-1">
               <Input
-                name="zipcode"
-                value={name.zipcode}
+                name="zipCode"
+                value={address.zipCode}
                 onChange={(e) => handlechange(e)}
                 label="Zip Code"
                 required
@@ -96,7 +84,7 @@ const DeliveryAddress = () => {
             <div className="sm:w-72 py-2  mx-2 ml-1">
               <Input
                 name="state"
-                value={name.state}
+                value={address.state}
                 onChange={(e) => handlechange(e)}
                 label="State/Region"
                 required
@@ -104,8 +92,8 @@ const DeliveryAddress = () => {
             </div>
             <div className="sm:w-72 py-2 mx-2 ml-1">
               <Input
-                name="phone"
-                value={name.phone}
+                name="mobile"
+                value={address.mobile}
                 onChange={(e) => handlechange(e)}
                 label="Phone"
                 type="number"

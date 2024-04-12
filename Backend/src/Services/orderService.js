@@ -89,10 +89,10 @@ const cancledOrder = async () => {
   return await order.save();
 };
 
-const findOrderById = async (orderId) => {
+const findOrderById = async (user, orderId) => {
   const order = await Order.findById(orderId)
     .populate("User")
-    .populate({ path: "orderItems", populate: { path: "product" } })
+    .populate({ path: "orderItems" })
     .populate("shippingAddress"); //note
 
   return order;

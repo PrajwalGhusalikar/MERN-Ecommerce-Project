@@ -1,7 +1,23 @@
-import React from "react";
-import CartItems from "../Cart/CartItems";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getOrder } from "../../../Store/Orders/Action";
+import { useLocation } from "react-router-dom";
+import OrderCartItems from "./OrderCartItems";
 
 const OrderSummary = () => {
+  const dispatch = useDispatch();
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search); //note
+  const orderId = searchParams.get("order_id");
+
+  useEffect(() => {
+    dispatch(getOrder(orderId));
+  }, [orderId]);
+
+  const { order } = useSelector((store) => store);
+
+  console.log("Order:", order.order);
+
   return (
     <section>
       <div className="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-2 lg:px-8">
@@ -13,7 +29,9 @@ const OrderSummary = () => {
           </header>
 
           <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-8">
-            <CartItems />
+            {order?.order?.data?.orderItems?.map((item) => (
+              <OrderCartItems items={item} />
+            ))}
 
             {/* Checkout */}
             <div className=" flex justify-end  pt-8">
@@ -21,11 +39,15 @@ const OrderSummary = () => {
                 <dl className="space-y-0.5 text-sm text-gray-700">
                   <div className="flex justify-between text-lg">
                     <dt>Total Items</dt>
-                    <dd className="font-semibold">5</dd>
+                    <dd className="font-semibold">
+                      {order?.order?.data?.OrderCartItems}
+                    </dd>
                   </div>
                   <div className="flex justify-between text-lg">
                     <dt>Price</dt>
-                    <dd className="font-semibold">250₹</dd>
+                    <dd className="font-semibold">
+                      {order?.order?.data?.totalPrice}
+                    </dd>
                   </div>
 
                   <div className="flex justify-between text-lg">
@@ -40,7 +62,9 @@ const OrderSummary = () => {
 
                   <div className="flex justify-between  font-semibold text-lg">
                     <dt>Total</dt>
-                    <dd className="text-lg font-semibold">200₹</dd>
+                    <dd className="text-lg font-semibold">
+                      {order?.order?.data?.totalPrice}
+                    </dd>
                   </div>
                 </dl>
 

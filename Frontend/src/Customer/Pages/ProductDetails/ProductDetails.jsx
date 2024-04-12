@@ -71,7 +71,7 @@ export default function ProductDetails() {
   const navigate = useNavigate();
   const [rated, setRated] = useState(4);
   const [selectedColor, setSelectedColor] = useState(productDemo.colors[0]);
-  const [selectedSize, setSelectedSize] = useState(productDemo.sizes[2]);
+  const [selectedSize, setSelectedSize] = useState("M");
   const [active, setActive] = useState(
     "https://tailwindui.com/img/ecommerce-images/product-page-02-secondary-product-shot.jpg"
   );
@@ -90,7 +90,7 @@ export default function ProductDetails() {
 
 
   const handleAddToCart = ()=>{
-    const data = { productId: params.productId , size: "S" };
+    const data = { productId: params.productId , size: selectedSize };
     dispatch(addItemToCart(data));
     navigate("/cart")
   }

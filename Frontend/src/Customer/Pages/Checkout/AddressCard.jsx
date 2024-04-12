@@ -30,7 +30,7 @@ const AddressCard = ({address}) => {
                       <>
                         Deliver to{" "}
                         <span className="text-yellow-800">
-                          {address.firstname}
+                          {address.firstName}
                         </span>
                       </>
                     }
@@ -51,15 +51,15 @@ const AddressCard = ({address}) => {
                 </div>
               </Typography>
               <Typography variant="h5" color="blue-gray" className="mb-2 ml-8">
-                {address.firstname} {address.lastname}
+                {address.firstName} {address.lastName}
               </Typography>
               <Typography variant="h6" className="ml-8">
                 {address.address},
                 <p>
                   {" "}
-                  {address.city}, {address.state}, {address.zipcode}
+                  {address.city}, {address.state}, {address.zipCode}
                 </p>
-                <p>Mobile No: {address.phone}</p>
+                <p>Mobile No: {address.mobile}</p>
               </Typography>
             </CardBody>
             {/* <CardFooter className="pt-0">

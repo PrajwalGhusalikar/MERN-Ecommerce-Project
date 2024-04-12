@@ -60,7 +60,6 @@ const orderSchema = new Schema({
   },
   totalItems: {
     type: Number,
-
   },
   creaatedAt: {
     type: Date,

@@ -11,6 +11,7 @@ const Cart = () => {
 
   // Memoize the selector function using useMemo
   const allCartItems = useMemo(() => cart.cart?.data?.cartItems, [cart]);
+  console.log("All Cart Items:", allCartItems)
 
   useEffect(() => {
     console.log("Component mounted");
